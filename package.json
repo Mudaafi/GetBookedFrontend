@@ -13,6 +13,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "encoding": "^0.1.13",
     "googleapis": "^72.0.0",
     "http2": "^3.3.7",
     "netlify-lambda": "^2.0.4",
