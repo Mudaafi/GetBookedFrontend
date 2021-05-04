@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img src="../assets/getbooked_logo.png" alt="Logo" />
+    <!-- <img src="../assets/getbooked_logo.png" alt="Logo" /> -->
     <div v-for="book in books" :key="book.id">
       <h3>{{ book.title }}</h3>
       <img :src="book.imgFrontUrl" :alt="book.isbn" />

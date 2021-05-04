@@ -1,6 +1,7 @@
 import { getData, writeData, appendToSheet } from './lib/gsheet-interface'
 import { GoogleApisParams, GetDataParams, PostDataParams } from './types'
 
+// --- Http Handlers
 const headers = {
   /* Required for CORS support to work */
   // Not required for deployment
@@ -32,7 +33,6 @@ export async function handler(event, context) {
   }
 }
 
-// --- Http Handlers
 const SHEET_NAME = 'RAW'
 async function handlePostRequests(data: PostDataParams) {
   switch (data.function) {

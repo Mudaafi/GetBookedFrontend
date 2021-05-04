@@ -1,24 +1,33 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <HeaderBar />
     <router-view />
   </div>
 </template>
 
+<script lang="ts">
+import Vue from 'vue'
+import HeaderBar from '@/components/HeaderBar.vue'
+export default Vue.extend({
+  components: {
+    HeaderBar,
+  },
+})
+</script>
+
 <style>
+:root {
+  --primary-orange: #ffc5a5;
+  --text-shadow: #adb095;
+  --highlight-yellow: #f2d366;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
 }
 
 #nav a {
