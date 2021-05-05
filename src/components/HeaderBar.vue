@@ -16,18 +16,27 @@
         <img src="@/assets/Instagram - inactive.svg" />
       </a>
     </span>
-    <MenuPop v-if="isMobile" />
+    <MenuHamburger
+      v-if="isMobile"
+      :isActive="showModalMenu"
+      @active="showModalMenu = !showModalMenu"
+    />
+    <transition name="fade">
+      <ModalMenu v-show="showModalMenu" @active="showModalMenu = false" />
+    </transition>
   </header>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import MenuPop from '@/components/MenuPop.vue'
+import MenuHamburger from '@/components/MenuHamburger.vue'
+import ModalMenu from '@/components/ModalMenu.vue'
 import { isMobileDevice } from '@/utilities'
 export default Vue.extend({
   name: 'HeaderBar',
   components: {
-    MenuPop,
+    MenuHamburger,
+    ModalMenu,
   },
   data() {
     return {
@@ -35,6 +44,7 @@ export default Vue.extend({
         tele: false,
         insta: false,
       },
+      showModalMenu: false,
     }
   },
   computed: {
@@ -53,11 +63,25 @@ export default Vue.extend({
   justify-content: space-between;
   align-items: center;
 }
+.menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Pacifico, 'Open Sans', 'Courier New', Courier, monospace;
+  font-size: 1.875rem;
+}
+.menu .link:not(:last-child) {
+  margin-right: 1.5rem;
+}
+.menu .link:nth-child(3) {
+  margin-right: 2.3125rem;
+}
+
 .link {
   text-decoration: none;
   color: rgb(105, 105, 105);
   display: flex;
-  transition: 0.3s ease-in-out;
+  transition: 0.2s ease-in-out;
   position: relative;
   z-index: 2;
 }
@@ -101,23 +125,20 @@ export default Vue.extend({
 }
 
 @media screen and (max-width: 1000px) {
+  .header {
+    padding: 10px 22px 12px 16px;
+  }
   .logo {
     font-size: 1.875rem;
     text-shadow: 0.203125rem 0 var(--text-shadow);
   }
 }
 
-.menu {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: Pacifico, 'Open Sans', 'Courier New', Courier, monospace;
-  font-size: 1.875rem;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.4s;
 }
-.menu .link:not(:last-child) {
-  margin-right: 1.5rem;
-}
-.menu .link:nth-child(3) {
-  margin-right: 2.3125rem;
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>

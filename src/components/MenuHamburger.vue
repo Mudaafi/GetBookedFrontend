@@ -2,7 +2,10 @@
   <a
     class="menu-pop"
     :class="{ active: isActive }"
-    @click="isActive = !isActive"
+    @click="
+      isActive = !isActive
+      $emit('active', isActive)
+    "
   >
     <span class="container top-bar">
       <span class="left-side"></span>
@@ -23,10 +26,11 @@
 import Vue from 'vue'
 export default Vue.extend({
   name: 'MenuPop',
-  data() {
-    return {
-      isActive: false,
-    }
+  props: {
+    isActive: {
+      type: Boolean,
+      required: true,
+    },
   },
 })
 </script>
