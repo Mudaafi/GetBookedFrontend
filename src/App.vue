@@ -20,10 +20,12 @@ export default Vue.extend({
   --primary-orange: #ffc5a5;
   --text-shadow: #adb095;
   --highlight-yellow: #f2d366;
+  --primary-blue: #c0f1f8;
+  --highlight-blue: #c0f1f8;
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Roboto, Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

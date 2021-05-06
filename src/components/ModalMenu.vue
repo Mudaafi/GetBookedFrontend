@@ -74,6 +74,7 @@ export default Vue.extend({
   color: rgb(105, 105, 105);
   transition: 0.2ms ease-in-out;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  cursor: pointer;
 }
 .button:hover,
 .button:active {

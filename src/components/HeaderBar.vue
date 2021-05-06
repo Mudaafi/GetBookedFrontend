@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <router-link :to="{ name: 'Home' }" class="link">
-      <span class="logo">Get Booked!</span>
+      <span class="logo-text">Get Booked!</span>
     </router-link>
     <span class="menu" v-if="!isMobile">
       <router-link :to="{ name: 'Home' }" class="link">register</router-link>
@@ -117,10 +117,10 @@ export default Vue.extend({
   opacity: 1;
 }
 
-.logo {
+.logo-text {
   color: white;
   font-family: Pacifico, Avenir, Helvetica, Arial, sans-serif;
-  text-shadow: 0.25rem 0 var(--text-shadow);
+  text-shadow: 0.35rem 0 var(--text-shadow);
   font-size: 2.8125rem;
 }
 
@@ -128,7 +128,7 @@ export default Vue.extend({
   .header {
     padding: 10px 22px 12px 16px;
   }
-  .logo {
+  .logo-text {
     font-size: 1.875rem;
     text-shadow: 0.203125rem 0 var(--text-shadow);
   }
