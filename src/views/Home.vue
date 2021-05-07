@@ -14,16 +14,17 @@
         <mark class="blue-highlight">Keen to contribute?</mark>
       </div>
       <div class="cta-btn-container">
-        <a href="" class="cta-btn">
+        <a class="cta-btn" href="">
           <img src="@/assets/Contribute - active.svg" class="cta-btn-active" />
           <img src="@/assets/Contribute - inactive.svg" />
         </a>
       </div>
     </section>
-    <div v-for="book in books" :key="book.id">
-      <h3>{{ book.title }}</h3>
-      <img :src="book.imgFrontUrl" :alt="book.isbn" />
-    </div>
+    <section class="book-listings">
+      <div v-for="book in books" :key="book.id">
+        <BookCard :book="book" class="book-listing" />
+      </div>
+    </section>
   </div>
 </template>
 
@@ -33,9 +34,12 @@ import Vue from 'vue'
 import { ActionType, GetterType } from '@/store/types'
 import { mapActions, mapGetters } from 'vuex'
 import { isMobileDevice } from '@/utilities'
-
+import BookCard from '@/components/BookCard.vue'
 export default Vue.extend({
   name: 'Home',
+  components: {
+    BookCard,
+  },
   computed: {
     ...mapGetters({
       books: GetterType.GET_BOOKS,
@@ -54,6 +58,9 @@ export default Vue.extend({
       postData: ActionType.WRITE_DATA,
       fetchData: ActionType.FETCH_BOOKS,
     }),
+  },
+  async mounted() {
+    this.fetchData()
   },
 })
 </script>
@@ -111,6 +118,7 @@ export default Vue.extend({
 
 .hero .cta-btn-container .cta-btn {
   width: fit-content;
+  cursor: pointer;
 }
 
 .hero .cta-btn-active {
@@ -129,6 +137,20 @@ export default Vue.extend({
   line-height: 0;
   padding: 0.2rem 0.25rem 0.85rem 0.125rem;
   display: inline-block;
+}
+
+.book-listings {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: -1rem; /* hack to exclude first row margin */
+  margin-bottom: 2rem;
+  padding-left: 2rem;
+}
+
+.book-listings .book-listing {
+  margin-right: 2rem; /* need hack to exclude first row */
+  margin-top: 5rem;
 }
 
 /* Mobile styles */

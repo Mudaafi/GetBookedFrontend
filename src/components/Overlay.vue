@@ -23,6 +23,7 @@ export default Vue.extend({
   right: 0px;
   bottom: 0px;
   left: 0px;
+  z-index: 9;
 }
 .overlay {
   position: absolute;

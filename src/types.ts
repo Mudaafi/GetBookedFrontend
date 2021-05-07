@@ -18,6 +18,8 @@ export interface BookListing {
 }
 
 export enum BookListingStatus {
-  ON_LOAN,
-  AVAILABLE,
+  ON_LOAN = 'On Loan',
+  AVAILABLE = 'Available',
+  NEW = 'New!',
+  RESERVED = 'Reserved',
 }

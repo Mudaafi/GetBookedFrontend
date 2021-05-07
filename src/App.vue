@@ -17,11 +17,16 @@ export default Vue.extend({
 
 <style>
 :root {
+  --background-main: #f5f8ff;
   --primary-orange: #ffc5a5;
   --text-shadow: #adb095;
   --highlight-yellow: #f2d366;
   --primary-blue: #c0f1f8;
   --highlight-blue: #c0f1f8;
+  --success-light: #7ec69b;
+  --info-light: #61b4ed;
+  --error-light: #de8e92;
+  --pending-light: #e4c450;
 }
 
 #app {
@@ -30,6 +35,10 @@ export default Vue.extend({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+body {
+  background-color: var(--background-main);
 }
 
 #nav a {
