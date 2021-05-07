@@ -32,6 +32,6 @@ export default Vue.extend({
   height: 100%;
   top: 0;
   z-index: -1;
-  opacity: 75%;
+  opacity: 0.75;
 }
 </style>

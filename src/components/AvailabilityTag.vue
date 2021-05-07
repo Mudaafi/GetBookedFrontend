@@ -14,7 +14,6 @@ export default Vue.extend({
   },
   computed: {
     matchTagToClassName() {
-      console.log(this.value == BookListingStatus.AVAILABLE)
       switch (this.value) {
         case BookListingStatus.ON_LOAN:
           return { error: true }
