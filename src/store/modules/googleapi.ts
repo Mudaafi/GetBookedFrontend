@@ -23,6 +23,11 @@ const getters: GetterTree<State, RootState> = {
   [GetterType.GET_BOOKS]: (state: State): Array<BookListing> => {
     return state.books
   },
+  [GetterType.GET_BOOK]: (state: State) => (
+    listingId: string,
+  ): BookListing | undefined => {
+    return state.books.find((book) => book.listingId == listingId)
+  },
 }
 
 const actions: ActionTree<State, RootState> = {

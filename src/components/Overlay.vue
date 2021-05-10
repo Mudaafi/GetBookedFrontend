@@ -1,8 +1,10 @@
 <template>
-  <div class="overlay-container" :style="{ top: `${topOffset || 75}px` }">
-    <slot />
-    <div class="overlay" />
-  </div>
+  <transition :name="transition || 'fade'">
+    <div class="overlay-container" :style="{ top: `${topOffset || 75}px` }">
+      <slot />
+      <div class="overlay" />
+    </div>
+  </transition>
 </template>
 
 <script lang="ts">
@@ -12,6 +14,9 @@ export default Vue.extend({
   props: {
     topOffset: {
       type: Number,
+    },
+    transition: {
+      type: String,
     },
   },
 })
@@ -33,5 +38,12 @@ export default Vue.extend({
   top: 0;
   z-index: -1;
   opacity: 0.75;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>

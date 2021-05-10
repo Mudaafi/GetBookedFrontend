@@ -7,4 +7,5 @@ export enum MutationType {
 }
 export enum GetterType {
   GET_BOOKS = 'GET_BOOKS',
+  GET_BOOK = 'GET_BOOK',
 }

@@ -21,9 +21,12 @@
       </div>
     </section>
     <section class="book-listings">
-      <div v-for="book in books" :key="book.id">
-        <BookCard :book="book" class="book-listing" />
-      </div>
+      <BookCard
+        v-for="book in books"
+        :key="book.id"
+        :book="book"
+        class="book-listing"
+      />
     </section>
   </div>
 </template>
@@ -143,14 +146,14 @@ export default Vue.extend({
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: -1rem; /* hack to exclude first row margin */
+  margin-top: 3rem;
   margin-bottom: 2rem;
   padding-left: 2rem;
 }
 
 .book-listings .book-listing {
-  margin-right: 2rem; /* need hack to exclude first row */
-  margin-top: 5rem;
+  margin-right: 2rem;
+  margin-bottom: 5rem;
 }
 
 /* Mobile styles */
@@ -158,7 +161,24 @@ export default Vue.extend({
   .bg-wave {
     padding-bottom: 20rem;
   }
+  .book-listings {
+    padding: 0;
+    margin: 0;
+  }
+  .book-listings .book-listing {
+    margin: 0;
+  }
+  .book-listings .book-listing {
+    margin-bottom: 1.25rem;
+  }
+  .book-listings .book-listing:nth-child(even) {
+    margin-left: 0.35rem;
+  }
+  .book-listings .book-listing:nth-child(odd) {
+    margin-right: 0.35rem;
+  }
 }
+
 .hero-mobile {
   font-size: 0.75rem;
   font-weight: light;
