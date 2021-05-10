@@ -116,7 +116,7 @@ export default Vue.extend({
   font-weight: 700;
 }
 .main .header .author {
-  margin-top: 0.07rem;
+  margin-top: 0.175rem;
   font-size: 0.75rem;
   font-weight: 300;
 }
@@ -149,7 +149,7 @@ export default Vue.extend({
 .main .button-container {
   display: flex;
   justify-content: center;
-  margin: 1.5rem 0;
+  margin: 1rem 0 1.5rem 0;
 }
 .main .button-container .btn {
   background-color: white;
