@@ -95,7 +95,7 @@ export default Vue.extend({
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 0 0;
+  object-position: center 0;
   transform-style: preserve-3d;
   border-radius: 32px;
 }
@@ -105,8 +105,8 @@ export default Vue.extend({
 }
 
 .slide.img-fullscreen {
-  height: 50vh;
-  width: 50vh;
+  height: 70vh;
+  width: 90vw;
   z-index: 10;
   transition: all 0.35s ease-in-out;
 }

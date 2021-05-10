@@ -1,5 +1,5 @@
 <template>
-  <div id="x">
+  <div>
     <span class="bg-wave"></span>
     <!-- Desktop View -->
     <div class="desktop-container" v-if="!isMobile">
@@ -24,7 +24,7 @@
       </div>
     </div>
     <!-- Mobile View -->
-    <div class="mobile-container" v-else id="y">
+    <div class="mobile-container" v-else>
       <div class="carousel" :class="{ 'is-fullscreen': isFullscreen }">
         <FlipImageSlide
           :frontUrl="book.imgFrontUrl"
@@ -44,6 +44,24 @@
           />
         </div>
       </div>
+      <section class="title-section">
+        <div class="title">{{ book.title }}</div>
+        <div class="author">
+          <i>{{ book.author }}</i>
+        </div>
+        <AvailabilityTag :value="book.status" class="tag" />
+        <div class="borrow-btn">Borrow</div>
+      </section>
+      <section class="synopsis-section">
+        <div class="section-title">Synopsis</div>
+        <div class="synopsis">{{ book.synopsis }}</div>
+      </section>
+      <section class="lenders-section">
+        <div class="section-title">Lenders:</div>
+        <ul class="lenders">
+          <li>{{ book.lenderName }}</li>
+        </ul>
+      </section>
     </div>
     <Overlay
       v-show="isFullscreen"
@@ -125,7 +143,7 @@ export default Vue.extend({
 
 @media screen and (max-width: 1000px) {
   .bg-wave {
-    padding-bottom: 27rem;
+    padding-bottom: 18rem;
   }
 }
 
@@ -211,6 +229,7 @@ export default Vue.extend({
   opacity: 1;
 }
 
+/* Mobile Styles */
 .mobile-container {
   width: 100%;
   height: 100%;
@@ -225,7 +244,7 @@ export default Vue.extend({
   transition: 0.25s ease-in-out;
 }
 .mobile-container .carousel.is-fullscreen {
-  transform: translateY(40px);
+  transform: translateY(10px);
   z-index: 5;
 }
 
@@ -250,5 +269,71 @@ export default Vue.extend({
   background-color: #5a6274;
   width: 1.825rem;
   border-radius: 32px;
+}
+
+.mobile-container section {
+  padding: 1rem 1.5rem 1.25rem 1.5rem;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 8px;
+}
+
+.mobile-container .title-section .title {
+  /* https://stackoverflow.com/questions/43683187/how-can-i-create-custom-underline-or-highlight-for-text-in-html-or-css */
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 38%,
+    var(--highlight-blue) 38%
+  );
+  font-size: 1.25rem;
+  font-weight: 700;
+  width: fit-content;
+  padding-right: 4px;
+  margin-bottom: 2px;
+}
+.mobile-container .title-section .author {
+  font-size: 0.75rem;
+  font-weight: 300;
+  margin-bottom: 7px;
+}
+
+.mobile-container .title-section .tag {
+  font-size: 0.5rem;
+  padding: 3px 12px;
+  margin-bottom: 12px;
+}
+
+.mobile-container .title-section .borrow-btn {
+  background-color: var(--primary-blue);
+  padding: 0.5rem 0.5rem;
+  border: 2px solid #000000;
+  border-radius: 8px;
+  font-weight: 900;
+  font-size: 22px;
+  line-height: 26px;
+  text-align: center;
+  letter-spacing: 0.05em;
+  color: var(--primary-orange);
+  -webkit-text-stroke: 1px black;
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
+  position: relative;
+}
+
+.mobile-container .section-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 7px;
+}
+
+.mobile-container .synopsis-section .synopsis {
+  font-size: 0.875rem;
+  letter-spacing: 0.085em;
+}
+
+.mobile-container .lenders-section .lenders {
+  margin: 0;
 }
 </style>
