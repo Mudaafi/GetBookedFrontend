@@ -5,16 +5,28 @@
         <button class="button" @click="$emit('active', false)">x</button>
       </header>
       <section class="menu">
-        <router-link :to="{ name: 'Home' }">
+        <router-link
+          :to="{ name: 'Home' }"
+          @click.native="$emit('active', false)"
+        >
           <mark>home</mark>
         </router-link>
-        <router-link :to="{ name: 'Home' }">
+        <router-link
+          :to="{ name: 'Home' }"
+          @click.native="$emit('active', false)"
+        >
           <mark>register</mark>
         </router-link>
-        <router-link :to="{ name: 'Home' }">
+        <router-link
+          :to="{ name: 'Home' }"
+          @click.native="$emit('active', false)"
+        >
           <mark>about</mark>
         </router-link>
-        <router-link :to="{ name: 'Home' }">
+        <router-link
+          :to="{ name: 'Home' }"
+          @click.native="$emit('active', false)"
+        >
           <mark>faq</mark>
         </router-link>
       </section>

@@ -48,6 +48,7 @@
     <Overlay
       v-show="isFullscreen"
       @click.native="isFullscreen = !isFullscreen"
+      style="z-index: 4"
     />
   </div>
 </template>
@@ -225,7 +226,7 @@ export default Vue.extend({
 }
 .mobile-container .carousel.is-fullscreen {
   transform: translateY(40px);
-  z-index: 10;
+  z-index: 5;
 }
 
 .mobile-container .carousel .pagination {
