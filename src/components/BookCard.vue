@@ -71,6 +71,7 @@ export default Vue.extend({
   width: 17.3125rem;
   min-width: 17.3125rem;
   /* height: 24.25rem; */
+  /* max-height: 14.9rem; */
   padding-bottom: 1.75rem;
   border-radius: 6px;
   box-shadow: 3px 4px 6px 3px rgba(0, 0, 0, 0.1225);

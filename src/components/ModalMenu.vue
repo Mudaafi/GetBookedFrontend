@@ -18,7 +18,7 @@
           <mark>register</mark>
         </router-link>
         <router-link
-          :to="{ name: 'Home' }"
+          :to="{ name: 'About' }"
           @click.native="$emit('active', false)"
         >
           <mark>about</mark>
