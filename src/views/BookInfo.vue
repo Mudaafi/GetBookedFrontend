@@ -63,6 +63,9 @@
         </ul>
       </section>
     </div>
+    <div class="default" v-else>
+      {{ isBookMissing ? 'Book not found :(' : 'Loading...' }}
+    </div>
     <Overlay
       v-show="isFullscreen"
       @click.native="isFullscreen = !isFullscreen"
@@ -97,6 +100,7 @@ export default Vue.extend({
     return {
       isFullscreen: false,
       isFrontPageActive: true,
+      isBookMissing: false,
     }
   },
   computed: {
@@ -122,6 +126,9 @@ export default Vue.extend({
     if (this.$store.getters[GetterType.GET_BOOK](this.listingId) == undefined) {
       this.$store.dispatch(ActionType.FETCH_BOOKS)
     }
+    setTimeout(() => {
+      this.isBookMissing = true
+    }, 5000)
   },
 })
 </script>
@@ -338,5 +345,18 @@ export default Vue.extend({
 
 .mobile-container .lenders-section .lenders {
   margin: 0;
+}
+
+.default {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30vh;
+  font-size: 32px;
+}
+@media screen and (max-width: 1000px) {
+  .default {
+    font-size: 18px;
+  }
 }
 </style>

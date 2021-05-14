@@ -23,6 +23,8 @@ export default Vue.extend({
           return { info: true }
         case BookListingStatus.RESERVED:
           return { pending: true }
+        case BookListingStatus.DELETED:
+          return { deleted: true }
         default:
           return ''
       }
@@ -54,5 +56,10 @@ export default Vue.extend({
 }
 .tag.info {
   background-color: var(--info-light);
+}
+.tag.deleted {
+  background-color: grey;
+  text-transform: uppercase;
+  font-style: italic;
 }
 </style>
