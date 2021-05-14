@@ -7,11 +7,11 @@
       <router-link :to="{ name: 'Home' }" class="link">register</router-link>
       <router-link :to="{ name: 'About' }" class="link">about</router-link>
       <router-link :to="{ name: 'Faq' }" class="link">faq</router-link>
-      <a href="" class="link">
+      <a :href="teleLink" class="link">
         <img src="@/assets/Telegram - active.svg" class="hover-link" />
         <img src="@/assets/Telegram - inactive.svg" />
       </a>
-      <a href="" class="link">
+      <a :href="instaLink" class="link">
         <img src="@/assets/Instagram - active.svg" class="hover-link" />
         <img src="@/assets/Instagram - inactive.svg" />
       </a>
@@ -31,6 +31,8 @@
 import Vue from 'vue'
 import MenuHamburger from '@/components/MenuHamburger.vue'
 import ModalMenu from '@/components/ModalMenu.vue'
+import { mapGetters } from 'vuex'
+import { ActionType, GetterType } from '@/store/types'
 import { isMobileDevice } from '@/utilities'
 export default Vue.extend({
   name: 'HeaderBar',
@@ -48,9 +50,16 @@ export default Vue.extend({
     }
   },
   computed: {
+    ...mapGetters({
+      teleLink: GetterType.TELE_LINK,
+      instaLink: GetterType.INSTA_LINK,
+    }),
     isMobile() {
       return isMobileDevice()
     },
+  },
+  mounted() {
+    this.$store.dispatch(ActionType.FETCH_LINKS)
   },
 })
 </script>

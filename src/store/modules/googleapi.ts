@@ -24,6 +24,8 @@ export type State = {
   activeMembers: MemberSection[]
   oldMembers: MemberSection[]
   faqs: Faq[]
+  teleLink: string
+  instaLink: string
 }
 
 const state = {
@@ -33,6 +35,8 @@ const state = {
   activeMembers: [],
   oldMembers: [],
   faqs: [],
+  teleLink: 'https://t.me/joinchat/AAAAAEfCMKTFggfLHNXOzw',
+  instaLink: 'https://www.instagram.com/nusms/',
 } as State
 
 const getters: GetterTree<State, RootState> = {
@@ -55,6 +59,12 @@ const getters: GetterTree<State, RootState> = {
   },
   [GetterType.FAQS]: (state: State): Faq[] => {
     return state.faqs
+  },
+  [GetterType.TELE_LINK]: (state: State): string => {
+    return state.teleLink
+  },
+  [GetterType.INSTA_LINK]: (state: State): string => {
+    return state.instaLink
   },
 }
 
@@ -105,6 +115,17 @@ const actions: ActionTree<State, RootState> = {
     ).data
     commit(MutationType.UPDATE_FAQS, aboutUsObjects)
   },
+  [ActionType.FETCH_LINKS]: async ({
+    commit,
+  }: ActionContext<State, RootState>) => {
+    const params: GetDataParams = {
+      function: 'links',
+    }
+    const links = (
+      await api.get(`/.netlify/functions/googleapi`, { params: params })
+    ).data
+    commit(MutationType.UPDATE_LINKS, links)
+  },
 }
 
 const mutations: MutationTree<State> = {
@@ -129,6 +150,10 @@ const mutations: MutationTree<State> = {
   },
   [MutationType.UPDATE_FAQS]: (state: State, faqs: Faq[]) => {
     state.faqs = faqs
+  },
+  [MutationType.UPDATE_LINKS]: (state: State, links: string[]) => {
+    state.teleLink = links[0]
+    state.instaLink = links[1]
   },
 }
 

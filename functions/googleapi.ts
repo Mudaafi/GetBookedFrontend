@@ -57,6 +57,7 @@ async function handleGetRequests(data: GetDataParams) {
         process.env.GSHEET_LOG_ID,
         BOOKS_SHEET_NAME,
       )
+      rows = rows.filter((row) => row[0] != null && row[0] != '')
       return rows.map((row: Array<any>) => convertGSheetRowToBookListing(row))
     case 'about':
       // Should probably pull data for each section in separate requests to avoid bloated nulls
@@ -74,6 +75,14 @@ async function handleGetRequests(data: GetDataParams) {
       )
       rows = rows.filter((row) => row[0] != null && row[0] != '')
       return rows.map((row: Array<any>) => convertGSheetRowToFaq(row))
+    case 'links':
+      var rows = await getData(
+        'M8:M',
+        process.env.GSHEET_LOG_ID,
+        STATICS_SHEET_NAME,
+      )
+      rows = rows.filter((row) => row[0] != null && row[0] != '')
+      return rows
     default:
   }
 }

@@ -31,11 +31,11 @@
         </router-link>
       </section>
       <footer class="footer">
-        <a href="" class="img-link">
+        <a :href="teleLink" class="img-link">
           <img src="@/assets/Telegram - active.svg" class="img-link-active" />
           <img src="@/assets/Telegram - inactive.svg" />
         </a>
-        <a href="" class="img-link">
+        <a :href="instaLink" class="img-link">
           <img src="@/assets/Instagram - active.svg" class="img-link-active" />
           <img src="@/assets/Instagram - inactive.svg" />
         </a>
@@ -47,11 +47,22 @@
 <script lang="ts">
 import Vue from 'vue'
 import Overlay from '@/components/Overlay.vue'
+import { ActionType, GetterType } from '@/store/types'
+import { mapGetters } from 'vuex'
 
 export default Vue.extend({
   name: 'ModalMenu',
   components: {
     Overlay,
+  },
+  computed: {
+    ...mapGetters({
+      teleLink: GetterType.TELE_LINK,
+      instaLink: GetterType.INSTA_LINK,
+    }),
+  },
+  mounted() {
+    this.$store.dispatch(ActionType.FETCH_LINKS)
   },
 })
 </script>
@@ -94,6 +105,8 @@ export default Vue.extend({
 }
 
 .menu {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   font-family: Pacifico, 'Open Sans', 'Courier New', Courier, monospace;
