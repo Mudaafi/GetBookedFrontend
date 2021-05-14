@@ -26,6 +26,7 @@ export type State = {
   faqs: Faq[]
   teleLink: string
   instaLink: string
+  registerLink: string
 }
 
 const state = {
@@ -37,6 +38,8 @@ const state = {
   faqs: [],
   teleLink: 'https://t.me/joinchat/AAAAAEfCMKTFggfLHNXOzw',
   instaLink: 'https://www.instagram.com/nusms/',
+  registerLink:
+    'https://docs.google.com/forms/d/e/1FAIpQLSfr79Mrgb15zfnj5XPbcyPiv1f3v4H-VJ8vgDcwd1mnHwrAhw/viewform?usp=sf_link',
 } as State
 
 const getters: GetterTree<State, RootState> = {
@@ -65,6 +68,9 @@ const getters: GetterTree<State, RootState> = {
   },
   [GetterType.INSTA_LINK]: (state: State): string => {
     return state.instaLink
+  },
+  [GetterType.REGISTER_LINK]: (state: State): string => {
+    return state.registerLink
   },
 }
 
@@ -154,6 +160,7 @@ const mutations: MutationTree<State> = {
   [MutationType.UPDATE_LINKS]: (state: State, links: string[]) => {
     state.teleLink = links[0]
     state.instaLink = links[1]
+    state.registerLink = links[2]
   },
 }
 

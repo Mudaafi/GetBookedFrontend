@@ -20,4 +20,5 @@ export enum GetterType {
   FAQS = 'FAQS',
   TELE_LINK = 'TELE_LINK',
   INSTA_LINK = 'INSTA_LINK',
+  REGISTER_LINK = 'REGISTER_LINK',
 }

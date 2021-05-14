@@ -4,7 +4,7 @@
       <span class="logo-text">Get Booked!</span>
     </router-link>
     <span class="menu" v-if="!isMobile">
-      <router-link :to="{ name: 'Home' }" class="link">register</router-link>
+      <a :href="registerLink" class="link">register</a>
       <router-link :to="{ name: 'About' }" class="link">about</router-link>
       <router-link :to="{ name: 'Faq' }" class="link">faq</router-link>
       <a :href="teleLink" class="link">
@@ -53,6 +53,7 @@ export default Vue.extend({
     ...mapGetters({
       teleLink: GetterType.TELE_LINK,
       instaLink: GetterType.INSTA_LINK,
+      registerLink: GetterType.REGISTER_LINK,
     }),
     isMobile() {
       return isMobileDevice()
