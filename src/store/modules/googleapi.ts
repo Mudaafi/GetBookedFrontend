@@ -9,24 +9,26 @@ import {
 } from 'vuex'
 import api from '../../api'
 import { State as RootState } from '../index'
-import { BookListing } from '@/types'
+import { BookListing, BookListingStatus } from '@/types'
 
 export type State = {
-  books: Array<BookListing>
+  books: { [id: string]: BookListing }
+  booksIdArr: string[]
 }
 
 const state = {
-  books: [] as Array<BookListing>,
+  books: {} as { [id: string]: BookListing },
+  booksIdArr: [] as string[],
 } as State
 
 const getters: GetterTree<State, RootState> = {
   [GetterType.GET_BOOKS]: (state: State): Array<BookListing> => {
-    return state.books
+    return state.booksIdArr.map((id: string) => state.books[id])
   },
   [GetterType.GET_BOOK]: (state: State) => (
     listingId: string,
   ): BookListing | undefined => {
-    return state.books.find((book) => book.listingId == listingId)
+    return state.books[listingId]
   },
 }
 
@@ -62,7 +64,15 @@ const actions: ActionTree<State, RootState> = {
 
 const mutations: MutationTree<State> = {
   [MutationType.UPDATE_BOOKS]: (state: State, books: Array<BookListing>) => {
-    state.books = books
+    const filteredBooks = books.filter(
+      (book) => book.status != BookListingStatus.DELETED,
+    )
+    const mappedBooks = filteredBooks.reduce((map, book) => {
+      map[book.listingId] = book
+      return map
+    }, {} as { [id: string]: BookListing })
+    state.books = mappedBooks
+    state.booksIdArr = filteredBooks.map((book) => book.listingId)
   },
 }
 

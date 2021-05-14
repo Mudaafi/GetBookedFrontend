@@ -2,7 +2,7 @@
   <div>
     <span class="bg-wave"></span>
     <!-- Desktop View -->
-    <div class="desktop-container" v-if="!isMobile">
+    <div class="desktop-container" v-if="!isLoading && !isMobile">
       <BookCard class="small-card" :book="book" :isExtracted="true" />
       <div class="big-card">
         <section class="synopsis-section">
@@ -24,7 +24,7 @@
       </div>
     </div>
     <!-- Mobile View -->
-    <div class="mobile-container" v-else>
+    <div class="mobile-container" v-else-if="!isLoading">
       <div class="carousel" :class="{ 'is-fullscreen': isFullscreen }">
         <FlipImageSlide
           :frontUrl="book.imgFrontUrl"
@@ -112,6 +112,9 @@ export default Vue.extend({
     },
     isMobile() {
       return isMobileDevice()
+    },
+    isLoading(): boolean {
+      return this.book == undefined
     },
   },
 

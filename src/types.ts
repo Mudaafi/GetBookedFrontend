@@ -22,4 +22,5 @@ export enum BookListingStatus {
   AVAILABLE = 'Available',
   NEW = 'New!',
   RESERVED = 'Reserved',
+  DELETED = 'Deleted',
 }
