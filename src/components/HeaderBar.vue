@@ -6,7 +6,7 @@
     <span class="menu" v-if="!isMobile">
       <router-link :to="{ name: 'Home' }" class="link">register</router-link>
       <router-link :to="{ name: 'About' }" class="link">about</router-link>
-      <router-link :to="{ name: 'Home' }" class="link">faq</router-link>
+      <router-link :to="{ name: 'Faq' }" class="link">faq</router-link>
       <a href="" class="link">
         <img src="@/assets/Telegram - active.svg" class="hover-link" />
         <img src="@/assets/Telegram - inactive.svg" />

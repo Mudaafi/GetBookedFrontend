@@ -260,7 +260,7 @@ export default Vue.extend({
   .about .card-title {
     font-size: 4rem;
     margin-left: 12px;
-    line-height: 4.25rem;
+    line-height: 4.8125rem;
     display: block;
   }
   .about .card.about-card .subsection {

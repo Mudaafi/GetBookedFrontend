@@ -24,7 +24,7 @@
           <mark>about</mark>
         </router-link>
         <router-link
-          :to="{ name: 'Home' }"
+          :to="{ name: 'Faq' }"
           @click.native="$emit('active', false)"
         >
           <mark>faq</mark>

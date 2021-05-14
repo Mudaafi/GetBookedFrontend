@@ -25,6 +25,11 @@ const routes: Array<RouteConfig> = [
     component: () => import('../views/BookInfo.vue'),
     props: true,
   },
+  {
+    path: '/faq',
+    name: 'Faq',
+    component: () => import('../views/Faq.vue'),
+  },
 ]
 
 const router = new VueRouter({
