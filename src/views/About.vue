@@ -30,7 +30,13 @@
           v-for="(section, index) of teamMembers"
           :key="index"
         >
-          <img :src="section.img" :alt="`${section.name} photo`" class="img" />
+          <img
+            :src="
+              section.img ? section.img : require('@/assets/getbooked_logo.png')
+            "
+            :alt="`${section.name} photo`"
+            class="img"
+          />
           <div class="name">
             {{ section.name }}
           </div>
@@ -48,7 +54,13 @@
           v-for="(section, index) of oldMembers"
           :key="index"
         >
-          <img :src="section.img" :alt="`${section.name} photo`" class="img" />
+          <img
+            :src="
+              section.img ? section.img : require('@/assets/getbooked_logo.png')
+            "
+            :alt="`${section.name} photo`"
+            class="img"
+          />
           <div class="name">
             {{ section.name }}
           </div>
@@ -63,91 +75,26 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { mapGetters } from 'vuex'
 import { isMobileDevice } from '@/utilities'
+import { ActionType, GetterType } from '@/store/types'
 export default Vue.extend({
   name: 'About',
   data() {
-    return {
-      aboutSections: [
-        {
-          title: 'Inception',
-          text:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum totam quo repudiandae possimus dicta eveniet, numquam placeat deleniti assumenda, quod facere eos quaerat voluptatem officiis accusamus sint. Et, suscipit at.',
-        },
-        {
-          title: 'Vision',
-          text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. ',
-        },
-        {
-          title: 'Mission',
-          text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. ',
-        },
-      ],
-      teamMembers: [
-        {
-          name: 'Adilah Hassan',
-          title: 'Head',
-          img: require('@/assets/getbooked_logo.png'),
-        },
-        {
-          name: 'Sarah Yusman',
-          title: 'Vice-Head',
-          img: require('@/assets/getbooked_logo.png'),
-        },
-        {
-          name: 'Adilah Hassan',
-          title: 'Head',
-          img: require('@/assets/getbooked_logo.png'),
-        },
-        {
-          name: 'Sarah Yusman',
-          title: 'Vice-Head',
-          img: require('@/assets/getbooked_logo.png'),
-        },
-        {
-          name: 'Adilah Hassan',
-          title: 'Head',
-          img: require('@/assets/getbooked_logo.png'),
-        },
-        {
-          name: 'Sarah Yusman',
-          title: 'Vice-Head',
-          img: require('@/assets/getbooked_logo.png'),
-        },
-        {
-          name: 'Adilah Hassan',
-          title: 'Head',
-          img: require('@/assets/getbooked_logo.png'),
-        },
-        {
-          name: 'Sarah Yusman',
-          title: 'Vice-Head',
-          img: require('@/assets/getbooked_logo.png'),
-        },
-      ],
-      oldMembers: [
-        {
-          name: 'Adilah Hassan',
-          title: '27th NUSMS, 2021',
-          img: require('@/assets/getbooked_logo.png'),
-        },
-        {
-          name: 'Sarah Yusman',
-          title: 'Coder, 2021',
-          img: require('@/assets/getbooked_logo.png'),
-        },
-        {
-          name: 'Sarah Yusman',
-          title: 'Coder, 2021',
-          img: require('@/assets/getbooked_logo.png'),
-        },
-      ],
-    }
+    return {}
   },
   computed: {
+    ...mapGetters({
+      aboutSections: GetterType.ABOUT_SECTIONS,
+      teamMembers: GetterType.ACTIVE_MEMBERS,
+      oldMembers: GetterType.OLD_MEMBERS,
+    }),
     isMobile() {
       return isMobileDevice()
     },
+  },
+  mounted() {
+    this.$store.dispatch(ActionType.FETCH_ABOUT)
   },
 })
 </script>
@@ -160,7 +107,7 @@ export default Vue.extend({
 }
 .about .card {
   /* color: black; */
-  padding: 16px 27px;
+  padding: 16px 27px 20px;
   background-color: #fff9f9;
   box-shadow: 4px 4px 34px -2px rgba(0, 0, 0, 0.25);
   border-radius: 24px;
@@ -250,7 +197,7 @@ export default Vue.extend({
 /* Dekstop Styles */
 @media screen and (min-width: 999px) {
   .about .card {
-    padding: 24px 40px;
+    padding: 24px 40px 40px;
     display: inline-block;
     width: 92%;
   }
@@ -268,7 +215,7 @@ export default Vue.extend({
   }
 
   .about .card .subsection:not(:last-child) {
-    margin-bottom: 24px;
+    margin-bottom: 40px;
   }
 
   .about .card .subsection .section-title {

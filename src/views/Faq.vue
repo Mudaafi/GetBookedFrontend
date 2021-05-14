@@ -14,28 +14,16 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { GetterType, ActionType } from '@/store/types'
 export default Vue.extend({
   name: 'Faq',
-  data() {
-    return {
-      faqs: [
-        {
-          qn: 'Do we like Ice-cream?',
-          ans:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum totam quo repudiandae possimus dicta eveniet, numquam placeat deleniti assumenda, quod facere eos quaerat voluptatem officiis accusamus sint. Et, suscipit at.',
-        },
-        {
-          qn: 'Are we nice?',
-          ans:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum totam quo repudiandae possimus dicta eveniet, numquam placeat deleniti assumenda, quod facere eos quaerat voluptatem officiis accusamus sint. Et, suscipit at.',
-        },
-        {
-          qn: 'When can I join?',
-          ans:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum totam quo repudiandae possimus dicta eveniet, numquam placeat deleniti assumenda, quod facere eos quaerat voluptatem officiis accusamus sint. Et, suscipit at.',
-        },
-      ],
-    }
+  computed: {
+    faqs() {
+      return this.$store.getters[GetterType.FAQS]
+    },
+  },
+  mounted() {
+    this.$store.dispatch(ActionType.FETCH_FAQS)
   },
 })
 </script>

@@ -24,3 +24,19 @@ export enum BookListingStatus {
   RESERVED = 'Reserved',
   DELETED = 'Deleted',
 }
+
+export interface Faq {
+  qn: string
+  ans: string
+}
+
+export interface AboutSection {
+  title: string
+  text: string
+}
+
+export interface MemberSection {
+  name: string
+  title?: string
+  img: string
+}

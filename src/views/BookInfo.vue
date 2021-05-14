@@ -105,7 +105,7 @@ export default Vue.extend({
   },
   computed: {
     book(): BookListing {
-      return this.$store.getters[GetterType.GET_BOOK](this.listingId)
+      return this.$store.getters[GetterType.BOOK](this.listingId)
     },
     isAvailable(): boolean {
       if (this.book == undefined) return false
@@ -123,7 +123,7 @@ export default Vue.extend({
   },
 
   async mounted() {
-    if (this.$store.getters[GetterType.GET_BOOK](this.listingId) == undefined) {
+    if (this.$store.getters[GetterType.BOOK](this.listingId) == undefined) {
       this.$store.dispatch(ActionType.FETCH_BOOKS)
     }
     setTimeout(() => {

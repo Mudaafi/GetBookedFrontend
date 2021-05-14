@@ -45,7 +45,7 @@ export default Vue.extend({
   },
   computed: {
     ...mapGetters({
-      books: GetterType.GET_BOOKS,
+      books: GetterType.BOOKS,
     }),
     isMobile() {
       return isMobileDevice()

@@ -3,7 +3,7 @@ export interface GoogleApisParams {
 }
 
 export interface GetDataParams extends GoogleApisParams {
-  range: string
+  range?: string
 }
 
 export interface PostDataParams extends GoogleApisParams {
