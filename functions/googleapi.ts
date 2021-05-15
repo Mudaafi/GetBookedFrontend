@@ -1,5 +1,11 @@
 import { getData, writeData, appendToSheet } from './lib/gsheet-interface'
-import { GoogleApisParams, GetDataParams, PostDataParams } from './types'
+import { sendMessage as sendTeleMsg } from './lib/telegram-interface'
+import {
+  GoogleApisParams,
+  GetDataParams,
+  PostDataParams,
+  BorrowParams,
+} from './types'
 import { BookListing, AboutSection, MemberSection, Faq } from '../src/types'
 
 // --- Http Handlers
@@ -17,7 +23,8 @@ export async function handler(event, context) {
   switch (httpMethod) {
     case 'POST':
       const body: GoogleApisParams = JSON.parse(event.body)
-      await handlePostRequests(body as PostDataParams)
+      const response = await handlePostRequests(body as PostDataParams)
+      res = response != undefined ? response.toString() : res
       break
 
     case 'GET':
@@ -38,7 +45,28 @@ const BOOKS_SHEET_NAME = 'RAW'
 const STATICS_SHEET_NAME = 'Statics'
 async function handlePostRequests(data: PostDataParams) {
   switch (data.function) {
+    case 'borrow':
+      const borrowParams = data.data as BorrowParams
+      var chatId = await getUserChatId(borrowParams.username)
+      if (chatId == null) return false
+      try {
+        await sendTeleMsg(
+          process.env.TELEBOT_KEY,
+          chatId,
+          `Hello! Do type in or tap the following to confirm your request:\n\n/borrow${borrowParams.bookListingId}`,
+        )
+        return true
+      } catch (e) {
+        console.log(e)
+        return false
+      }
+      return true
+    case 'verifyUser':
+      if (typeof data.data != 'string') return
+      var chatId = await getUserChatId(data.data)
+      return chatId != undefined
     case 'default':
+      if (typeof data.data != 'string') return
       return writeData(
         data.range,
         data.data,
@@ -85,6 +113,19 @@ async function handleGetRequests(data: GetDataParams) {
       return rows
     default:
   }
+}
+
+// Complex Logic
+async function getUserChatId(username: string): Promise<number> {
+  const USER_SHEET = 'users'
+  const rows = await getData('A2:D', process.env.GSHEET_LOG_ID, USER_SHEET)
+  const userRow = rows.filter(
+    (row) =>
+      row[1] != undefined &&
+      row[1].toLowerCase() == username.toLowerCase() &&
+      row[3] == 'verified',
+  )[0]
+  return userRow != null ? parseInt(userRow[0]) : null
 }
 
 // -- Helper functions

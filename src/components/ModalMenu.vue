@@ -71,10 +71,10 @@ export default Vue.extend({
 .overlay-main {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .container {
   background-color: white;
-  margin-top: 45px;
   height: 25%;
   display: block;
   padding: 0;

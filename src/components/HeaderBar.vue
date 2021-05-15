@@ -1,30 +1,32 @@
 <template>
-  <header class="header">
-    <router-link :to="{ name: 'Home' }" class="link">
-      <span class="logo-text">Get Booked!</span>
-    </router-link>
-    <span class="menu" v-if="!isMobile">
-      <a :href="registerLink" class="link">register</a>
-      <router-link :to="{ name: 'About' }" class="link">about</router-link>
-      <router-link :to="{ name: 'Faq' }" class="link">faq</router-link>
-      <a :href="teleLink" class="link">
-        <img src="@/assets/Telegram - active.svg" class="hover-link" />
-        <img src="@/assets/Telegram - inactive.svg" />
-      </a>
-      <a :href="instaLink" class="link">
-        <img src="@/assets/Instagram - active.svg" class="hover-link" />
-        <img src="@/assets/Instagram - inactive.svg" />
-      </a>
-    </span>
-    <MenuHamburger
-      v-if="isMobile"
-      :isActive="showModalMenu"
-      @active="showModalMenu = !showModalMenu"
-    />
+  <div>
+    <header class="header">
+      <router-link :to="{ name: 'Home' }" class="link">
+        <span class="logo-text">Get Booked!</span>
+      </router-link>
+      <span class="menu" v-if="!isMobile">
+        <a :href="registerLink" class="link">register</a>
+        <router-link :to="{ name: 'About' }" class="link">about</router-link>
+        <router-link :to="{ name: 'Faq' }" class="link">faq</router-link>
+        <a :href="teleLink" class="link">
+          <img src="@/assets/Telegram - active.svg" class="hover-link" />
+          <img src="@/assets/Telegram - inactive.svg" />
+        </a>
+        <a :href="instaLink" class="link">
+          <img src="@/assets/Instagram - active.svg" class="hover-link" />
+          <img src="@/assets/Instagram - inactive.svg" />
+        </a>
+      </span>
+      <MenuHamburger
+        v-if="isMobile"
+        :isActive="showModalMenu"
+        @active="showModalMenu = !showModalMenu"
+      />
+    </header>
     <transition name="fade">
       <ModalMenu v-show="showModalMenu" @active="showModalMenu = false" />
     </transition>
-  </header>
+  </div>
 </template>
 
 <script lang="ts">
@@ -72,6 +74,8 @@ export default Vue.extend({
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 20;
+  position: relative;
 }
 .menu {
   display: flex;

@@ -1,5 +1,9 @@
 import { ActionType, GetterType, MutationType } from '@/store/types'
-import { GetDataParams, PostDataParams } from '../../../functions/types'
+import {
+  BorrowParams,
+  GetDataParams,
+  PostDataParams,
+} from '../../../functions/types'
 import {
   ActionContext,
   ActionTree,
@@ -86,8 +90,8 @@ const actions: ActionTree<State, RootState> = {
     ).data
     commit(MutationType.UPDATE_BOOKS, books)
   },
-
   [ActionType.WRITE_DATA]: async (
+    // eslint-disable-next-line
     { commit }: ActionContext<State, RootState>,
     { cell, data }: { cell: string; data: string },
   ) => {
@@ -131,6 +135,30 @@ const actions: ActionTree<State, RootState> = {
       await api.get(`/.netlify/functions/googleapi`, { params: params })
     ).data
     commit(MutationType.UPDATE_LINKS, links)
+  },
+
+  [ActionType.VERIFY_USER]: async (
+    // eslint-disable-next-line
+    { commit }: ActionContext<State, RootState>,
+    username: string,
+  ) => {
+    const params: PostDataParams = {
+      function: 'verifyUser',
+      data: username,
+    }
+    return (await api.post(`/.netlify/functions/googleapi`, params)).data
+  },
+
+  [ActionType.BORROW_BOOK]: async (
+    // eslint-disable-next-line
+    { commit }: ActionContext<State, RootState>,
+    borrowParams: BorrowParams,
+  ) => {
+    const params: PostDataParams = {
+      function: 'borrow',
+      data: borrowParams,
+    }
+    return (await api.post(`/.netlify/functions/googleapi`, params)).data
   },
 }
 

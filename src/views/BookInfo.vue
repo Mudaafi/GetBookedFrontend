@@ -3,7 +3,12 @@
     <span class="bg-wave"></span>
     <!-- Desktop View -->
     <div class="desktop-container" v-if="!isLoading && !isMobile">
-      <BookCard class="small-card" :book="book" :isExtracted="true" />
+      <BookCard
+        class="small-card"
+        :book="book"
+        :isExtracted="true"
+        @borrow="isFormVisible = true"
+      />
       <div class="big-card">
         <section class="synopsis-section">
           <h3 class="section-header">Synopsis</h3>
@@ -17,7 +22,9 @@
         </section>
         <section class="footer-section">
           <div class="button-container" v-if="isAvailable">
-            <button class="btn">Borrow Now!</button>
+            <button class="btn" @click="isFormVisible = true">
+              Borrow Now!
+            </button>
           </div>
           <AvailabilityTag class="tag" :value="book.status" v-else />
         </section>
@@ -50,7 +57,7 @@
           <i>{{ book.author }}</i>
         </div>
         <AvailabilityTag :value="book.status" class="tag" />
-        <div class="borrow-btn">Borrow</div>
+        <div class="borrow-btn" @click="isFormVisible = true">Borrow</div>
       </section>
       <section class="synopsis-section">
         <div class="section-title">Synopsis</div>
@@ -71,6 +78,15 @@
       @click.native="isFullscreen = !isFullscreen"
       style="z-index: 4"
     />
+    <transition name="fade">
+      <BorrowForm
+        v-if="book != undefined"
+        :title="book.title"
+        :bookListingId="book.listingId"
+        @close="isFormVisible = false"
+        v-show="isFormVisible"
+      />
+    </transition>
   </div>
 </template>
 
@@ -80,6 +96,7 @@ import BookCard from '@/components/BookCard.vue'
 import AvailabilityTag from '@/components/AvailabilityTag.vue'
 import FlipImageSlide from '@/components/FlipImageSlide.vue'
 import Overlay from '@/components/Overlay.vue'
+import BorrowForm from '@/components/ModalBorrow.vue'
 import { ActionType, GetterType } from '@/store/types'
 import { BookListing, BookListingStatus } from '@/types'
 import { isMobileDevice } from '@/utilities'
@@ -95,12 +112,14 @@ export default Vue.extend({
     AvailabilityTag,
     FlipImageSlide,
     Overlay,
+    BorrowForm,
   },
   data() {
     return {
       isFullscreen: false,
       isFrontPageActive: true,
       isBookMissing: false,
+      isFormVisible: false,
     }
   },
   computed: {
@@ -167,7 +186,7 @@ export default Vue.extend({
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   text-align: start;
 
   width: 65%;
@@ -354,6 +373,15 @@ export default Vue.extend({
   height: 30vh;
   font-size: 32px;
 }
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
 @media screen and (max-width: 1000px) {
   .default {
     font-size: 18px;

@@ -113,7 +113,7 @@ export default Vue.extend({
   border-radius: 24px;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   margin-bottom: 20px;
 }
 .about .card-title {

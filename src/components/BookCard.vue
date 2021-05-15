@@ -22,7 +22,7 @@
         {{ book.synopsis }}
       </section>
       <section class="button-container" v-else-if="isAvailable && !isMobile">
-        <button class="btn">Borrow</button>
+        <button class="btn" @click="$emit('borrow')">Borrow</button>
       </section>
     </main>
 

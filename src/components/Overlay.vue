@@ -1,6 +1,6 @@
 <template>
   <transition :name="transition || 'fade'">
-    <div class="overlay-container" :style="{ top: `${topOffset || 75}px` }">
+    <div class="overlay-container" :style="{ top: `${topOffset || 0}px` }">
       <slot />
       <div class="overlay" />
     </div>

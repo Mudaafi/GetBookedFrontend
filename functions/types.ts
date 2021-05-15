@@ -7,6 +7,11 @@ export interface GetDataParams extends GoogleApisParams {
 }
 
 export interface PostDataParams extends GoogleApisParams {
-  range: string
-  data: string
+  range?: string
+  data: string | BorrowParams
+}
+
+export interface BorrowParams {
+  username: string
+  bookListingId: string
 }
