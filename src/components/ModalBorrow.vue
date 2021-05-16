@@ -73,7 +73,7 @@
         </div>
       </section>
       <section class="sending-in-progress" v-else-if="!isRequestSent">
-        <div>Beaming you the secret code via Telegram @jibreelbot</div>
+        <div>Beaming you the secret code via Telegram @getbooked_bot</div>
         <div class="sending-container">
           <div class="box">
             <div class="border one"></div>
