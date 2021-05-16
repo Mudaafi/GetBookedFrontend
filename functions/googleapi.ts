@@ -41,7 +41,7 @@ export async function handler(event, context) {
   }
 }
 
-const BOOKS_SHEET_NAME = 'RAW'
+const BOOKS_SHEET_NAME = 'books'
 const STATICS_SHEET_NAME = 'Statics'
 async function handlePostRequests(data: PostDataParams) {
   switch (data.function) {
