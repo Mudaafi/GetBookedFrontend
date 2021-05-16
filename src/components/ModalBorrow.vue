@@ -66,7 +66,10 @@
           Request
         </button>
         <div class="footer">
-          Haven't registered? <a :href="registerLink">Register Now!</a>
+          Haven't registered?
+          <a href="https://telegram.me/getbooked_bot" target="_blank"
+            >Register Now!</a
+          >
         </div>
       </section>
       <section class="sending-in-progress" v-else-if="!isRequestSent">
@@ -105,8 +108,8 @@ import Vue from 'vue'
 import Overlay from './Overlay.vue'
 import debounce from 'lodash.debounce'
 import BorrowForm from './ModalBorrow.vue'
-import { mapActions, mapGetters } from 'vuex'
-import { ActionType, GetterType } from '@/store/types'
+import { mapActions } from 'vuex'
+import { ActionType } from '@/store/types'
 import { BorrowParams } from 'functions/types'
 export default Vue.extend({
   name: 'ModalBorrow',
@@ -131,11 +134,6 @@ export default Vue.extend({
       isRequestSent: false,
       isSendingRequest: false,
     }
-  },
-  computed: {
-    ...mapGetters({
-      registerLink: GetterType.REGISTER_LINK,
-    }),
   },
   methods: {
     ...mapActions({
