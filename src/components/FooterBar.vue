@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer :style="`background-color: ${bgColor}`">
     <hr />
     <div class="copyright">© 2021 by NUS Muslim Society</div>
     <div class="credits">
@@ -14,9 +14,24 @@
 </template>
 
 <script lang="ts">
+import { RouteConfig } from 'node_modules/vue-router/types'
 import Vue from 'vue'
 export default Vue.extend({
   name: 'FooterBar',
+  data() {
+    return {
+      bgColor: 'var(--background-main)',
+    }
+  },
+  watch: {
+    $route(to: RouteConfig) {
+      if (to.name == 'Faq' || to.name == 'About') {
+        this.bgColor = 'white'
+      } else {
+        this.bgColor = 'var(--background-main)'
+      }
+    },
+  },
 })
 </script>
 <style scoped>
