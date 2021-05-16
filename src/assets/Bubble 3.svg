@@ -1,0 +1,18 @@
+<svg width="286" height="285" viewBox="0 0 286 285" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="130" cy="130" r="128.75" fill="url(#paint0_radial)" fill-opacity="0.4" stroke="url(#paint1_radial)" stroke-width="1.5"/>
+<circle cx="219" cy="218" r="66.5" fill="#FFEDED" fill-opacity="0.7" stroke="url(#paint2_radial)"/>
+<defs>
+<radialGradient id="paint0_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(221.5 216) rotate(-135.146) scale(277.187)">
+<stop stop-color="#FFD3D3"/>
+<stop offset="1" stop-color="#FFBABA" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="paint1_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(224 217) rotate(-137.726) scale(364.219)">
+<stop stop-color="#FFEFEF"/>
+<stop offset="1" stop-color="#FFEFEF" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="paint2_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(268.203 263.539) rotate(-137.726) scale(190.646)">
+<stop stop-color="#FFEFEF"/>
+<stop offset="1" stop-color="#FFEFEF" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>
