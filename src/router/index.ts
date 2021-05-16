@@ -30,6 +30,11 @@ const routes: Array<RouteConfig> = [
     name: 'Faq',
     component: () => import('../views/Faq.vue'),
   },
+  {
+    path: '/*',
+    name: '404Page',
+    component: () => import('../views/404.vue'),
+  },
 ]
 
 const router = new VueRouter({
