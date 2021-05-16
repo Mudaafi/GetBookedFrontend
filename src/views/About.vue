@@ -102,7 +102,7 @@ export default Vue.extend({
       return isMobileDevice()
     },
   },
-  mounted() {
+  created() {
     this.$store.dispatch(ActionType.FETCH_ABOUT)
   },
 })

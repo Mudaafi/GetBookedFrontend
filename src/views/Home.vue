@@ -63,7 +63,7 @@ export default Vue.extend({
       fetchData: ActionType.FETCH_BOOKS,
     }),
   },
-  async mounted() {
+  async created() {
     this.fetchData()
   },
 })

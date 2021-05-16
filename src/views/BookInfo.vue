@@ -141,7 +141,7 @@ export default Vue.extend({
     },
   },
 
-  async mounted() {
+  async created() {
     if (this.$store.getters[GetterType.BOOK](this.listingId) == undefined) {
       this.$store.dispatch(ActionType.FETCH_BOOKS)
     }

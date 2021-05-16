@@ -40,7 +40,7 @@ export default Vue.extend({
       return this.$store.getters[GetterType.FAQS]
     },
   },
-  mounted() {
+  created() {
     this.$store.dispatch(ActionType.FETCH_FAQS)
   },
 })

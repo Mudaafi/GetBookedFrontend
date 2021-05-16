@@ -62,7 +62,7 @@ export default Vue.extend({
       instaLink: GetterType.INSTA_LINK,
     }),
   },
-  mounted() {
+  created() {
     this.$store.dispatch(ActionType.FETCH_LINKS)
   },
 })
