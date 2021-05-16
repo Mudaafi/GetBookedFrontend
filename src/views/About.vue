@@ -1,5 +1,14 @@
 <template>
   <div class="about">
+    <span class="bubbles bubble-1"
+      ><img src="@/assets/Bubble 1.svg" alt="bubbles"
+    /></span>
+    <span class="bubbles bubble-3"
+      ><img src="@/assets/Bubble 3.svg" alt="bubbles"
+    /></span>
+    <span class="bubbles bubble-4"
+      ><img src="@/assets/Bubble 4.svg" alt="bubbles"
+    /></span>
     <section class="card about-card">
       <img
         v-if="!isMobile"
@@ -104,6 +113,13 @@ export default Vue.extend({
   background-color: white;
   height: 100%;
   padding: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.about > :not(.bubbles, .card) {
+  position: relative;
+  z-index: 2;
 }
 .about .card {
   /* color: black; */
@@ -194,6 +210,39 @@ export default Vue.extend({
   margin: 7px 15px 12px 5px;
 }
 
+.bubbles {
+  position: absolute;
+}
+
+.bubbles.bubble-1 {
+  top: 29%;
+  right: -1.5rem;
+}
+.bubbles.bubble-1 img {
+  width: 8rem;
+}
+
+.bubbles.bubble-3 {
+  top: 50rem;
+  left: -2rem;
+}
+.bubbles.bubble-3 img {
+  width: 10rem;
+}
+.card.thanks-card {
+  position: relative;
+  z-index: 2;
+}
+
+.bubbles.bubble-4 {
+  right: 0rem;
+  bottom: 0;
+  z-index: 3;
+}
+.bubbles.bubble-4 img {
+  width: 8rem;
+}
+
 /* Dekstop Styles */
 @media screen and (min-width: 999px) {
   .about .card {
@@ -242,6 +291,24 @@ export default Vue.extend({
   .about .card.team-card .subsection .team-member,
   .about .card.thanks-card .subsection .team-member {
     margin: 20px 30px 50px 30px;
+  }
+
+  .bubbles.bubble-1 {
+    top: 29%;
+    right: -2rem;
+  }
+  .bubbles.bubble-1 img {
+    width: 12rem;
+  }
+  .bubbles.bubble-3 {
+    top: 52%;
+    left: -10rem;
+  }
+  .bubbles.bubble-3 img {
+    width: 20rem;
+  }
+  .bubbles.bubble-4 img {
+    width: 15rem;
   }
 }
 </style>
