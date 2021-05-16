@@ -14,6 +14,7 @@
         <a
           href="https://telegram.me/getbooked_bot"
           target="_blank"
+          rel="noopener"
           @click="$emit('active', false)"
         >
           <mark>register</mark>
@@ -32,11 +33,11 @@
         </router-link>
       </section>
       <footer class="footer">
-        <a :href="teleLink" class="img-link" target="_blank">
+        <a :href="teleLink" class="img-link" target="_blank" rel="noopener">
           <img src="@/assets/Telegram - active.svg" class="img-link-active" />
           <img src="@/assets/Telegram - inactive.svg" />
         </a>
-        <a :href="instaLink" class="img-link" target="_blank">
+        <a :href="instaLink" class="img-link" target="_blank" rel="noopener">
           <img src="@/assets/Instagram - active.svg" class="img-link-active" />
           <img src="@/assets/Instagram - inactive.svg" />
         </a>

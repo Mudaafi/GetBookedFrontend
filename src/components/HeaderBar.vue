@@ -5,18 +5,33 @@
         <span class="logo-text">Get Booked!</span>
       </router-link>
       <span class="menu" v-if="!isMobile">
-        <a href="https://telegram.me/getbooked_bot" class="link" target="_blank"
+        <a
+          href="https://telegram.me/getbooked_bot"
+          class="link"
+          target="_blank"
+          rel="noopener"
           >register</a
         >
         <router-link :to="{ name: 'About' }" class="link">about</router-link>
         <router-link :to="{ name: 'Faq' }" class="link">faq</router-link>
-        <a :href="teleLink" class="link" target="_blank">
-          <img src="@/assets/Telegram - active.svg" class="hover-link" />
-          <img src="@/assets/Telegram - inactive.svg" />
+        <a :href="teleLink" class="link" target="_blank" rel="noopener">
+          <img
+            src="@/assets/Telegram - active.svg"
+            class="hover-link"
+            alt="Link to Telegram"
+          />
+          <img src="@/assets/Telegram - inactive.svg" alt="Link to Telegram" />
         </a>
-        <a :href="instaLink" class="link" target="_blank">
-          <img src="@/assets/Instagram - active.svg" class="hover-link" />
-          <img src="@/assets/Instagram - inactive.svg" />
+        <a :href="instaLink" class="link" target="_blank" rel="noopener">
+          <img
+            src="@/assets/Instagram - active.svg"
+            class="hover-link"
+            alt="Link to Instagram"
+          />
+          <img
+            src="@/assets/Instagram - inactive.svg"
+            alt="Link to Instagram"
+          />
         </a>
       </span>
       <MenuHamburger
@@ -121,6 +136,8 @@ export default Vue.extend({
 .link img {
   align-items: center;
   margin-bottom: -8px;
+  width: 47px;
+  height: 47px;
 }
 .hover-link {
   opacity: 0;

@@ -14,9 +14,16 @@
         <mark class="blue-highlight">Keen to contribute?</mark>
       </div>
       <div class="cta-btn-container">
-        <a class="cta-btn" :href="registerLink" target="_blank">
-          <img src="@/assets/Contribute - active.svg" class="cta-btn-active" />
-          <img src="@/assets/Contribute - inactive.svg" />
+        <a class="cta-btn" :href="registerLink" target="_blank" rel="noopener">
+          <img
+            src="@/assets/Contribute - active.svg"
+            class="cta-btn-active"
+            alt="Link to contribute your book for borrowers"
+          />
+          <img
+            src="@/assets/Contribute - inactive.svg"
+            alt="Link to contribute your book for borrowers"
+          />
         </a>
       </div>
     </section>
@@ -80,6 +87,11 @@ export default Vue.extend({
   padding-bottom: 29.5rem;
   z-index: -1;
   display: flex;
+}
+
+.hero.hero-desktop .cta-btn img {
+  width: 5.3125rem;
+  height: 5.3125rem;
 }
 
 .bg-wave .logo {
@@ -196,6 +208,7 @@ export default Vue.extend({
 }
 .hero.hero-mobile .cta-btn img {
   width: 4.75rem;
+  height: 4.75rem;
 }
 .hero.hero-mobile .cta-text .blue-highlight {
   padding-bottom: 0.575rem;

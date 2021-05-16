@@ -67,7 +67,10 @@
         </button>
         <div class="footer">
           Haven't registered?
-          <a href="https://telegram.me/getbooked_bot" target="_blank"
+          <a
+            href="https://telegram.me/getbooked_bot"
+            target="_blank"
+            rel="noopener"
             >Register Now!</a
           >
         </div>
