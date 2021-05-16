@@ -5,14 +5,16 @@
         <span class="logo-text">Get Booked!</span>
       </router-link>
       <span class="menu" v-if="!isMobile">
-        <a :href="registerLink" class="link">register</a>
+        <a href="https://telegram.me/getbooked_bot" class="link" target="_blank"
+          >register</a
+        >
         <router-link :to="{ name: 'About' }" class="link">about</router-link>
         <router-link :to="{ name: 'Faq' }" class="link">faq</router-link>
-        <a :href="teleLink" class="link">
+        <a :href="teleLink" class="link" target="_blank">
           <img src="@/assets/Telegram - active.svg" class="hover-link" />
           <img src="@/assets/Telegram - inactive.svg" />
         </a>
-        <a :href="instaLink" class="link">
+        <a :href="instaLink" class="link" target="_blank">
           <img src="@/assets/Instagram - active.svg" class="hover-link" />
           <img src="@/assets/Instagram - inactive.svg" />
         </a>
@@ -55,7 +57,6 @@ export default Vue.extend({
     ...mapGetters({
       teleLink: GetterType.TELE_LINK,
       instaLink: GetterType.INSTA_LINK,
-      registerLink: GetterType.REGISTER_LINK,
     }),
     isMobile() {
       return isMobileDevice()

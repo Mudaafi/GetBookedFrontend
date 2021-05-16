@@ -11,12 +11,13 @@
         >
           <mark>home</mark>
         </router-link>
-        <router-link
-          :to="{ name: 'Home' }"
-          @click.native="$emit('active', false)"
+        <a
+          href="https://telegram.me/getbooked_bot"
+          target="_blank"
+          @click="$emit('active', false)"
         >
           <mark>register</mark>
-        </router-link>
+        </a>
         <router-link
           :to="{ name: 'About' }"
           @click.native="$emit('active', false)"
@@ -31,11 +32,11 @@
         </router-link>
       </section>
       <footer class="footer">
-        <a :href="teleLink" class="img-link">
+        <a :href="teleLink" class="img-link" target="_blank">
           <img src="@/assets/Telegram - active.svg" class="img-link-active" />
           <img src="@/assets/Telegram - inactive.svg" />
         </a>
-        <a :href="instaLink" class="img-link">
+        <a :href="instaLink" class="img-link" target="_blank">
           <img src="@/assets/Instagram - active.svg" class="img-link-active" />
           <img src="@/assets/Instagram - inactive.svg" />
         </a>

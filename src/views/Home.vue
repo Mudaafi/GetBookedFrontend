@@ -14,7 +14,7 @@
         <mark class="blue-highlight">Keen to contribute?</mark>
       </div>
       <div class="cta-btn-container">
-        <a class="cta-btn" href="">
+        <a class="cta-btn" :href="registerLink" target="_blank">
           <img src="@/assets/Contribute - active.svg" class="cta-btn-active" />
           <img src="@/assets/Contribute - inactive.svg" />
         </a>
@@ -46,6 +46,7 @@ export default Vue.extend({
   computed: {
     ...mapGetters({
       books: GetterType.BOOKS,
+      registerLink: GetterType.REGISTER_LINK,
     }),
     isMobile() {
       return isMobileDevice()
