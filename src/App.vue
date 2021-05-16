@@ -2,15 +2,18 @@
   <div id="app">
     <HeaderBar />
     <router-view />
+    <FooterBar />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import HeaderBar from '@/components/HeaderBar.vue'
+import FooterBar from '@/components/FooterBar.vue'
 export default Vue.extend({
   components: {
     HeaderBar,
+    FooterBar,
   },
 })
 </script>
@@ -35,6 +38,10 @@ export default Vue.extend({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  display: flex;
+  min-height: 100vh;
+  margin: 0;
+  flex-direction: column;
 }
 
 body {

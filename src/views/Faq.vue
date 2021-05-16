@@ -128,7 +128,7 @@ export default Vue.extend({
 }
 
 .bubbles.bubble-4 {
-  bottom: 0;
+  bottom: -1rem;
   right: 0;
 }
 .bubbles.bubble-4 img {
@@ -204,7 +204,7 @@ export default Vue.extend({
   }
 
   .bubbles.bubble-4 {
-    bottom: 0;
+    bottom: -1rem;
     right: 0;
   }
   .bubbles.bubble-4 img {

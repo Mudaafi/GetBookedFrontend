@@ -88,11 +88,13 @@ export default Vue.extend({
   margin-left: 3rem;
   margin-top: 8.5rem;
 }
-
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1182px) {
   .bg-wave .logo {
     opacity: 0;
   }
+}
+
+@media screen and (max-width: 1000px) {
   .bg-wave {
     padding-bottom: 27rem;
   }

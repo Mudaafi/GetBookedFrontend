@@ -236,7 +236,7 @@ export default Vue.extend({
 
 .bubbles.bubble-4 {
   right: 0rem;
-  bottom: 0;
+  bottom: -1rem;
   z-index: 3;
 }
 .bubbles.bubble-4 img {
