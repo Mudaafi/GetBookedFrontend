@@ -6,6 +6,7 @@ export enum ActionType {
   FETCH_LINKS = 'FETCH_LINKS',
   BORROW_BOOK = 'BORROW_BOOK',
   VERIFY_USER = 'VERIFY_USER',
+  LOG_USER = 'LOG_USER',
 }
 export enum MutationType {
   UPDATE_BOOKS = 'UPDATE_BOOKS',

@@ -160,6 +160,16 @@ const actions: ActionTree<State, RootState> = {
     }
     return (await api.post(`/.netlify/functions/googleapi`, params)).data
   },
+  [ActionType.LOG_USER]: async (
+    // eslint-disable-next-line
+    { commit }: ActionContext<State, RootState>,
+  ) => {
+    const params: PostDataParams = {
+      function: 'logEntry',
+      data: '',
+    }
+    return (await api.post(`/.netlify/functions/googleapi`, params)).data
+  },
 }
 
 const mutations: MutationTree<State> = {

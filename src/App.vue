@@ -10,10 +10,14 @@
 import Vue from 'vue'
 import HeaderBar from '@/components/HeaderBar.vue'
 import FooterBar from '@/components/FooterBar.vue'
+import { ActionType } from './store/types'
 export default Vue.extend({
   components: {
     HeaderBar,
     FooterBar,
+  },
+  async created() {
+    this.$store.dispatch(ActionType.LOG_USER)
   },
 })
 </script>

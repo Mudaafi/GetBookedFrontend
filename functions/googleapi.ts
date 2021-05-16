@@ -43,6 +43,7 @@ export async function handler(event, context) {
 
 const BOOKS_SHEET_NAME = 'books'
 const STATICS_SHEET_NAME = 'Statics'
+const CONFIG_SHEET_NAME = 'config'
 async function handlePostRequests(data: PostDataParams) {
   switch (data.function) {
     case 'borrow':
@@ -73,6 +74,17 @@ async function handlePostRequests(data: PostDataParams) {
         process.env.GSHEET_LOG_ID,
         BOOKS_SHEET_NAME,
       )
+    case 'logEntry':
+      var currentVisits = (
+        await getData('G2', process.env.GSHEET_LOG_ID, CONFIG_SHEET_NAME)
+      )[0][0]
+      await writeData(
+        'G2',
+        `${parseInt(currentVisits) + 1}`,
+        process.env.GSHEET_LOG_ID,
+        CONFIG_SHEET_NAME,
+      )
+      return
     default:
   }
 }
