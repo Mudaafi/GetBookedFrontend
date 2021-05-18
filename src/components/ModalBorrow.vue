@@ -92,7 +92,7 @@
       </section>
       <section class="sending-complete" v-else>
         <div class="confirmation-text">Code sent via Telegram!</div>
-        <div>Do reply @jibreelbot to confirm your loan</div>
+        <div>Do reply @getbooked_bot to confirm your loan</div>
         <div>
           <img
             class="confirmation-svg"
