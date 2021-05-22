@@ -14,4 +14,5 @@ export interface PostDataParams extends GoogleApisParams {
 export interface BorrowParams {
   username: string
   bookListingId: string
+  bookTitle: string
 }

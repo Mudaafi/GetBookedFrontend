@@ -1,5 +1,8 @@
 import { getData, writeData, appendToSheet } from './lib/gsheet-interface'
-import { sendMessage as sendTeleMsg } from './lib/telegram-interface'
+import {
+  genInlineButtons,
+  sendMessage as sendTeleMsg,
+} from './lib/telegram-interface'
 import {
   GoogleApisParams,
   GetDataParams,
@@ -50,11 +53,16 @@ async function handlePostRequests(data: PostDataParams) {
       const borrowParams = data.data as BorrowParams
       var chatId = await getUserChatId(borrowParams.username)
       if (chatId == null) return false
+      let btns = genInlineButtons(
+        [['Confirm']],
+        [`/borrow${borrowParams.bookListingId}`],
+      )
       try {
         await sendTeleMsg(
           process.env.TELEBOT_KEY,
           chatId,
-          `Hello! Do type in or tap the following to confirm your request:\n\n/borrow${borrowParams.bookListingId}`,
+          `Hello! You have requested to borrow the book:\n<b>${borrowParams.bookTitle}</b>\n\nPlease confirm this request.`,
+          btns,
         )
         return true
       } catch (e) {

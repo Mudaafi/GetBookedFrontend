@@ -155,6 +155,7 @@ export default Vue.extend({
       const borrowParams: BorrowParams = {
         username: this.username,
         bookListingId: this.bookListingId,
+        bookTitle: this.title,
       }
       this.isRequestSent = await this.borrowBook(borrowParams)
       this.isSendingRequest = false
