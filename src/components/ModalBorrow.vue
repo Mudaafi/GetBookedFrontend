@@ -113,7 +113,7 @@ import debounce from 'lodash.debounce'
 import BorrowForm from './ModalBorrow.vue'
 import { mapActions } from 'vuex'
 import { ActionType } from '@/store/types'
-import { BorrowParams } from 'functions/types'
+import { BorrowParams } from 'functions/lib/types'
 export default Vue.extend({
   name: 'ModalBorrow',
   components: {

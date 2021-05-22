@@ -3,7 +3,7 @@ import {
   BorrowParams,
   GetDataParams,
   PostDataParams,
-} from '../../../functions/types'
+} from '../../../functions/lib/types'
 import {
   ActionContext,
   ActionTree,

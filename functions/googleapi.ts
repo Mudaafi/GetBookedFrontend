@@ -8,7 +8,7 @@ import {
   GetDataParams,
   PostDataParams,
   BorrowParams,
-} from './types'
+} from './lib/types'
 import { BookListing, AboutSection, MemberSection, Faq } from '../src/types'
 
 // --- Http Handlers
