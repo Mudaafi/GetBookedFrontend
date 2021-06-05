@@ -22,7 +22,12 @@
         {{ book.synopsis }}
       </section>
       <section class="button-container" v-else-if="isAvailable && !isMobile">
-        <button class="btn" @click="$emit('borrow')">Borrow</button>
+        <button class="btn" @click="$emit('borrow')" v-if="isWithinPhase">
+          Borrow
+        </button>
+        <div v-else style="text-align: center">
+          <em>The current phase for Get Booked! has ended.</em>
+        </div>
       </section>
     </main>
 
@@ -38,6 +43,7 @@ import Vue, { PropType } from 'vue'
 import { BookListing, BookListingStatus } from '@/types'
 import { isMobileDevice } from '@/utilities'
 import AvailabilityTag from '@/components/AvailabilityTag.vue'
+import { GetterType } from '@/store/types'
 export default Vue.extend({
   name: 'BookCard',
   props: {
@@ -61,6 +67,9 @@ export default Vue.extend({
         this.book.status == BookListingStatus.AVAILABLE ||
         this.book.status == BookListingStatus.NEW
       )
+    },
+    isWithinPhase(): boolean {
+      return this.$store.getters[GetterType.IS_WITHIN_PHASE](new Date())
     },
   },
 })

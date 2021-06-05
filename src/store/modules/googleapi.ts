@@ -31,6 +31,7 @@ export type State = {
   teleLink: string
   instaLink: string
   registerLink: string
+  currentPhase: (Date | null)[] // [start_of_phase, end_of_phase]
 }
 
 const state = {
@@ -44,6 +45,7 @@ const state = {
   instaLink: 'https://www.instagram.com/nusms/',
   registerLink:
     'https://docs.google.com/forms/d/e/1FAIpQLSfr79Mrgb15zfnj5XPbcyPiv1f3v4H-VJ8vgDcwd1mnHwrAhw/viewform?usp=sf_link',
+  currentPhase: [],
 } as State
 
 const getters: GetterTree<State, RootState> = {
@@ -75,6 +77,33 @@ const getters: GetterTree<State, RootState> = {
   },
   [GetterType.REGISTER_LINK]: (state: State): string => {
     return state.registerLink
+  },
+  [GetterType.PHASE_START]: (state: State): Date | null => {
+    return state.currentPhase[0]
+  },
+  [GetterType.PHASE_END]: (state: State): Date | null => {
+    return state.currentPhase[1]
+  },
+  [GetterType.IS_WITHIN_PHASE]: (state: State) => (date: Date) => {
+    if (state.currentPhase.length == 0) return false
+    const storedStartDate = state.currentPhase[0]
+    const storedEndDate = state.currentPhase[1]
+
+    // Define new variables to prevent mutation
+    let startDate
+    let endDate
+    if (typeof storedStartDate == 'string')
+      startDate = new Date(storedStartDate)
+    else startDate = storedStartDate == null ? null : new Date(storedStartDate)
+    if (typeof storedEndDate == 'string') endDate = new Date(storedEndDate)
+    else endDate = storedEndDate == null ? null : new Date(storedEndDate)
+
+    // Check if within phase
+    if (endDate != null) endDate.setDate(endDate.getDate() + 1)
+    if (startDate == null) return false
+    if (date >= startDate) {
+      return endDate == null ? true : date <= endDate
+    }
   },
 }
 
@@ -170,6 +199,17 @@ const actions: ActionTree<State, RootState> = {
     }
     return (await api.post(`/.netlify/functions/googleapi`, params)).data
   },
+  [ActionType.FETCH_PHASE]: async ({
+    commit,
+  }: ActionContext<State, RootState>) => {
+    const params: GetDataParams = {
+      function: 'phase',
+    }
+    const dates = (
+      await api.get(`/.netlify/functions/googleapi`, { params: params })
+    ).data
+    commit(MutationType.UPDATE_PHASE, dates)
+  },
 }
 
 const mutations: MutationTree<State> = {
@@ -199,6 +239,14 @@ const mutations: MutationTree<State> = {
     state.teleLink = links[0]
     state.instaLink = links[1]
     state.registerLink = links[2]
+  },
+  [MutationType.UPDATE_PHASE]: (state: State, dateStrArr: string[]) => {
+    const dates = dateStrArr.map(function (elem) {
+      if (elem == '') return null
+      const dateParts = elem.split('/').map((elem) => parseInt(elem))
+      return new Date(dateParts[2], dateParts[1] - 1, dateParts[0])
+    })
+    state.currentPhase = dates
   },
 }
 

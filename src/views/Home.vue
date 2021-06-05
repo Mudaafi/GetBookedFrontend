@@ -68,10 +68,12 @@ export default Vue.extend({
     ...mapActions({
       postData: ActionType.WRITE_DATA,
       fetchData: ActionType.FETCH_BOOKS,
+      fetchPhase: ActionType.FETCH_PHASE,
     }),
   },
   async created() {
     this.fetchData()
+    this.fetchPhase()
   },
 })
 </script>

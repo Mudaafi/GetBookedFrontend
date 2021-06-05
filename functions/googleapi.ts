@@ -69,7 +69,6 @@ async function handlePostRequests(data: PostDataParams) {
         console.log(e)
         return false
       }
-      return true
     case 'verifyUser':
       if (typeof data.data != 'string') return
       var chatId = await getUserChatId(data.data)
@@ -131,6 +130,14 @@ async function handleGetRequests(data: GetDataParams) {
       )
       rows = rows.filter((row) => row[0] != null && row[0] != '')
       return rows
+    case 'phase':
+      var rows = await getData(
+        'H2:I2',
+        process.env.GSHEET_LOG_ID,
+        CONFIG_SHEET_NAME,
+      )
+      var dates = rows[0]
+      return dates
     default:
   }
 }

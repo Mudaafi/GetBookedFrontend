@@ -22,9 +22,18 @@
         </section>
         <section class="footer-section">
           <div class="button-container" v-if="isAvailable">
-            <button class="btn" @click="isFormVisible = true">
+            <button
+              class="btn"
+              @click="isFormVisible = true"
+              v-if="isWithinPhase"
+            >
               Borrow Now!
             </button>
+            <div v-else style="text-align: center">
+              <em>The current phase for Get Booked! has ended.</em>
+              <br />
+              <em>See you in the next one!</em>
+            </div>
           </div>
           <AvailabilityTag class="tag" :value="book.status" v-else />
         </section>
@@ -57,7 +66,21 @@
           <i>{{ book.author }}</i>
         </div>
         <AvailabilityTag :value="book.status" class="tag" />
-        <div class="borrow-btn" @click="isFormVisible = true">Borrow</div>
+        <div v-if="isAvailable">
+          <div
+            class="borrow-btn"
+            @click="isFormVisible = true"
+            v-if="isWithinPhase"
+          >
+            Borrow
+          </div>
+          <div v-else style="text-align: center">
+            <em
+              >The current phase for Get Booked! has ended. See you in the next
+              one!</em
+            >
+          </div>
+        </div>
       </section>
       <section class="synopsis-section">
         <div class="section-title">Synopsis</div>
@@ -139,9 +162,13 @@ export default Vue.extend({
     isLoading(): boolean {
       return this.book == undefined
     },
+    isWithinPhase(): boolean {
+      return this.$store.getters[GetterType.IS_WITHIN_PHASE](new Date())
+    },
   },
 
   async created() {
+    this.$store.dispatch(ActionType.FETCH_PHASE)
     if (this.$store.getters[GetterType.BOOK](this.listingId) == undefined) {
       this.$store.dispatch(ActionType.FETCH_BOOKS)
     }
