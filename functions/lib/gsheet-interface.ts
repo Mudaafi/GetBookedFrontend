@@ -71,10 +71,11 @@ export async function getData(
       (err: Error | null, res: any) => {
         if (err) return console.log('The API returned an error: ' + err)
         const rows = res.data.values
-        if (rows.length) {
+        if (rows != null && rows.length) {
           resolve(rows)
         } else {
           console.log('No data found.')
+          resolve(null)
         }
       },
     )

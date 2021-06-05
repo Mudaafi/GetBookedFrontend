@@ -136,7 +136,7 @@ async function handleGetRequests(data: GetDataParams) {
         process.env.GSHEET_LOG_ID,
         CONFIG_SHEET_NAME,
       )
-      var dates = rows[0]
+      var dates = rows != null ? rows[0] : ['', '']
       return dates
     default:
   }

@@ -242,7 +242,7 @@ const mutations: MutationTree<State> = {
   },
   [MutationType.UPDATE_PHASE]: (state: State, dateStrArr: string[]) => {
     const dates = dateStrArr.map(function (elem) {
-      if (elem == '') return null
+      if (elem == '' || elem == null) return null
       const dateParts = elem.split('/').map((elem) => parseInt(elem))
       return new Date(dateParts[2], dateParts[1] - 1, dateParts[0])
     })
