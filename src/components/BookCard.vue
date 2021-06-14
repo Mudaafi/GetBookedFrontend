@@ -8,9 +8,22 @@
         : { name: 'BookInfo', params: { listingId: book.listingId } }
     "
   >
-    <picture>
-      <img :src="book.imgFrontUrl" alt="" class="img img-bg" />
+    <picture class="carousel" :class="{ 'is-fullscreen': isFullscreen }">
+      <FlipImageSlide
+        class="img img-bg"
+        :frontUrl="book.imgFrontUrl"
+        :backUrl="book.imgBackUrl"
+        :isFullscreen="isFullscreen"
+        :isDesktop="!isMobile"
+        @changeFullscreen="$emit('changeFullscreen', $event)"
+        @isFrontPageActive="isFrontPageActive = $event"
+      />
+      <div class="pagination">
+        <button class="page-tab" :class="{ 'is-active': isFrontPageActive }" />
+        <button class="page-tab" :class="{ 'is-active': !isFrontPageActive }" />
+      </div>
     </picture>
+
     <main class="main">
       <header class="header">
         <div class="title">
@@ -44,6 +57,7 @@ import { BookListing, BookListingStatus } from '@/types'
 import { isMobileDevice } from '@/utilities'
 import AvailabilityTag from '@/components/AvailabilityTag.vue'
 import { GetterType } from '@/store/types'
+import FlipImageSlide from '@/components/FlipImageSlide.vue'
 export default Vue.extend({
   name: 'BookCard',
   props: {
@@ -54,9 +68,14 @@ export default Vue.extend({
       type: Boolean,
       default: false,
     },
+    isFullscreen: {
+      type: Boolean,
+      default: false,
+    },
   },
   components: {
     AvailabilityTag,
+    FlipImageSlide,
   },
   computed: {
     isMobile() {
@@ -71,6 +90,11 @@ export default Vue.extend({
     isWithinPhase(): boolean {
       return this.$store.getters[GetterType.IS_WITHIN_PHASE](new Date())
     },
+  },
+  data() {
+    return {
+      isFrontPageActive: true,
+    }
   },
 })
 </script>
@@ -211,6 +235,44 @@ export default Vue.extend({
   margin-right: 6px;
 }
 
+.container .carousel {
+  transition: all 0.35s ease-in-out;
+}
+
+.container .carousel.is-fullscreen {
+  transform: translateY(10px) translateX(30vw);
+  width: 50vh;
+  z-index: 5;
+}
+@media screen and (max-width: 1000px) {
+  .container .carousel.is-fullscreen {
+    transform: translateY(10px) translateX(20vw);
+  }
+}
+
+.container .carousel .pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.container .carousel .pagination .page-tab {
+  border-width: 0;
+  background-color: rgb(173, 173, 173);
+  border-radius: 100px;
+  margin: 10px 5px;
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+  transition: 0.25s ease-in-out;
+}
+
+.container .carousel .pagination .page-tab.is-active {
+  background-color: #5a6274;
+  width: 1.825rem;
+  border-radius: 32px;
+}
+
 /* Mobile Styles */
 @media screen and (max-width: 600px) {
   .container {
@@ -222,7 +284,7 @@ export default Vue.extend({
     margin-top: 0;
     width: 100%;
     height: 10rem;
-    border-radius: 8px;
+    border-radius: 0.5rem 0.5rem 0 0;
   }
   .img-bg {
     box-shadow: none;

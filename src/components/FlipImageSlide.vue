@@ -2,7 +2,11 @@
   <div
     class="slide"
     id="z"
-    :class="{ 'img-fullscreen': isFullscreen, 'is-flipping': isFlipping }"
+    :class="{
+      'img-fullscreen': isFullscreen,
+      'is-flipping': isFlipping,
+      'is-desktop': isDesktop,
+    }"
     :style="`transform: rotateY(${flipAngle + deltaAngle}deg)`"
     @click="$emit('changeFullscreen', !isFullscreen)"
   >
@@ -27,6 +31,10 @@ export default Vue.extend({
       type: Boolean,
       required: true,
     },
+    isDesktop: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -40,6 +48,7 @@ export default Vue.extend({
     }
   },
   methods: {
+    // Touch screen events
     touchStart(event: TouchEvent) {
       this.touchState.startX = event.touches[0].clientX
       this.touchState.endX = 0
@@ -57,12 +66,25 @@ export default Vue.extend({
         Math.abs(deltaAngle) < sensitivity ? 0 : deltaAngle > 0 ? 1 : -1
       let noOfTurns = Math.floor(Math.abs(deltaAngle / 180)) + 1
       let finalAngle = this.flipAngle + flipDirection * noOfTurns * 180
-
       // Set the variables all at once to avoid janky transitions
       this.deltaAngle = 0
       this.flipAngle = finalAngle
       this.isFlipping = false
       this.$emit('isFrontPageActive', this.flipAngle % 360 == 0)
+    },
+    // Mouse Events
+    clickStart(event: DragEvent) {
+      this.touchState.startX = event.clientX
+      this.touchState.endX = 0
+      this.isFlipping = true
+    },
+    clickMove(event: DragEvent) {
+      if (event.clientX == 0) return
+      this.touchState.endX = event.clientX
+      this.deltaAngle = this.touchState.endX - this.touchState.startX
+    },
+    clickEnd() {
+      this.touchEnd()
     },
   },
   mounted() {
@@ -73,6 +95,14 @@ export default Vue.extend({
       this.touchMove(event as TouchEvent),
     )
     this.$el.addEventListener('touchend', () => this.touchEnd())
+
+    this.$el.addEventListener('dragstart', (event) =>
+      this.clickStart(event as DragEvent),
+    )
+    this.$el.addEventListener('drag', (event) =>
+      this.clickMove(event as DragEvent),
+    )
+    this.$el.addEventListener('dragend', () => this.clickEnd())
   },
 })
 </script>
@@ -86,6 +116,7 @@ export default Vue.extend({
   transition: all 0.5s ease-in-out;
   display: inline-block;
   border-radius: 32px;
+  cursor: pointer;
 }
 
 .slide .img {
@@ -97,7 +128,7 @@ export default Vue.extend({
   object-fit: cover;
   object-position: center 0;
   transform-style: preserve-3d;
-  border-radius: 32px;
+  border-radius: inherit;
 }
 
 .slide .img.front {
@@ -113,6 +144,10 @@ export default Vue.extend({
   width: 90vw;
   z-index: 10;
   transition: all 0.35s ease-in-out;
+}
+
+.slide.is-desktop.img-fullscreen {
+  width: 50vh;
 }
 
 .slide.is-flipping {

@@ -7,7 +7,9 @@
         class="small-card"
         :book="book"
         :isExtracted="true"
+        :isFullscreen="isFullscreen"
         @borrow="isFormVisible = true"
+        @changeFullscreen="isFullscreen = $event"
       />
       <div class="big-card">
         <section class="synopsis-section">
@@ -204,7 +206,7 @@ export default Vue.extend({
 }
 
 .desktop-container .small-card {
-  max-height: 20.625rem;
+  max-height: 21.625rem;
   margin: 0;
 }
 
