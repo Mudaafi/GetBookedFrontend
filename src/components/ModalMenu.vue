@@ -26,6 +26,12 @@
           <mark>about</mark>
         </router-link>
         <router-link
+          :to="{ name: 'Rules' }"
+          @click.native="$emit('active', false)"
+        >
+          <mark>rules</mark>
+        </router-link>
+        <router-link
           :to="{ name: 'Faq' }"
           @click.native="$emit('active', false)"
         >

@@ -25,7 +25,7 @@ export default Vue.extend({
   },
   watch: {
     $route(to: RouteConfig) {
-      if (to.name == 'Faq' || to.name == 'About') {
+      if (to.name == 'Faq' || to.name == 'About' || to.name == 'Rules') {
         this.bgColor = 'white'
       } else {
         this.bgColor = 'var(--background-main)'

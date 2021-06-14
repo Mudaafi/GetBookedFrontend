@@ -9,7 +9,13 @@ import {
   PostDataParams,
   BorrowParams,
 } from './lib/types'
-import { BookListing, AboutSection, MemberSection, Faq } from '../src/types'
+import {
+  BookListing,
+  AboutSection,
+  MemberSection,
+  Faq,
+  Rules,
+} from '../src/types'
 
 // --- Http Handlers
 const headers = {
@@ -122,6 +128,14 @@ async function handleGetRequests(data: GetDataParams) {
       )
       rows = rows.filter((row) => row[0] != null && row[0] != '')
       return rows.map((row: Array<any>) => convertGSheetRowToFaq(row))
+    case 'rules':
+      var rows = await getData(
+        'N8:O',
+        process.env.GSHEET_LOG_ID,
+        STATICS_SHEET_NAME,
+      )
+      rows = rows.filter((row) => row[0] != null && row[0] != '')
+      return rows.map((row: Array<any>) => convertGSheetRowToRules(row))
     case 'links':
       var rows = await getData(
         'M8:M',
@@ -246,4 +260,14 @@ function convertGSheetRowToFaq(row: Array<any>) {
     qn: row[QUESTION],
     ans: row[ANSWER],
   } as Faq
+}
+
+function convertGSheetRowToRules(row: Array<any>) {
+  const RULE = 0 //"N";
+  const ELAB = 1 //"O";
+
+  return {
+    rule: row[RULE],
+    elab: row[ELAB],
+  } as Rules
 }

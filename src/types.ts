@@ -30,6 +30,11 @@ export interface Faq {
   ans: string
 }
 
+export interface Rules {
+  rule: string
+  elab: string
+}
+
 export interface AboutSection {
   title: string
   text: string

@@ -19,6 +19,7 @@ import {
   BookListingStatus,
   Faq,
   MemberSection,
+  Rules,
 } from '@/types'
 
 export type State = {
@@ -28,6 +29,7 @@ export type State = {
   activeMembers: MemberSection[]
   oldMembers: MemberSection[]
   faqs: Faq[]
+  rules: Rules[]
   teleLink: string
   instaLink: string
   registerLink: string
@@ -41,6 +43,7 @@ const state = {
   activeMembers: [],
   oldMembers: [],
   faqs: [],
+  rules: [],
   teleLink: 'https://t.me/joinchat/AAAAAEfCMKTFggfLHNXOzw',
   instaLink: 'https://www.instagram.com/nusms/',
   registerLink:
@@ -68,6 +71,9 @@ const getters: GetterTree<State, RootState> = {
   },
   [GetterType.FAQS]: (state: State): Faq[] => {
     return state.faqs
+  },
+  [GetterType.RULES]: (state: State): Rules[] => {
+    return state.rules
   },
   [GetterType.TELE_LINK]: (state: State): string => {
     return state.teleLink
@@ -149,10 +155,21 @@ const actions: ActionTree<State, RootState> = {
     const params: GetDataParams = {
       function: 'faqs',
     }
-    const aboutUsObjects = (
+    const faqs = (
       await api.get(`/.netlify/functions/googleapi`, { params: params })
     ).data
-    commit(MutationType.UPDATE_FAQS, aboutUsObjects)
+    commit(MutationType.UPDATE_FAQS, faqs)
+  },
+  [ActionType.FETCH_RULES]: async ({
+    commit,
+  }: ActionContext<State, RootState>) => {
+    const params: GetDataParams = {
+      function: 'rules',
+    }
+    const rules = (
+      await api.get(`/.netlify/functions/googleapi`, { params: params })
+    ).data
+    commit(MutationType.UPDATE_RULES, rules)
   },
   [ActionType.FETCH_LINKS]: async ({
     commit,
@@ -234,6 +251,9 @@ const mutations: MutationTree<State> = {
   },
   [MutationType.UPDATE_FAQS]: (state: State, faqs: Faq[]) => {
     state.faqs = faqs
+  },
+  [MutationType.UPDATE_RULES]: (state: State, rules: Rules[]) => {
+    state.rules = rules
   },
   [MutationType.UPDATE_LINKS]: (state: State, links: string[]) => {
     state.teleLink = links[0]

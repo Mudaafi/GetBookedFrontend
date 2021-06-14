@@ -13,6 +13,7 @@
           >register</a
         >
         <router-link :to="{ name: 'About' }" class="link">about</router-link>
+        <router-link :to="{ name: 'Rules' }" class="link">rules</router-link>
         <router-link :to="{ name: 'Faq' }" class="link">faq</router-link>
         <a :href="teleLink" class="link" target="_blank" rel="noopener">
           <img
@@ -103,8 +104,8 @@ export default Vue.extend({
 .menu .link:not(:last-child) {
   margin-right: 1.5rem;
 }
-.menu .link:nth-child(3) {
-  margin-right: 2.3125rem;
+.menu .link:nth-child(4) {
+  margin-right: 2rem;
 }
 
 .link {
@@ -119,7 +120,7 @@ export default Vue.extend({
 .link:active {
   color: black;
 }
-.menu .link:nth-child(-n + 3)::before {
+.menu .link:nth-child(-n + 4)::before {
   content: '';
   display: block;
   position: absolute;
@@ -129,8 +130,8 @@ export default Vue.extend({
   left: 0;
   right: -2px;
 }
-.menu .link:nth-child(-n + 3):hover::before,
-.menu .link:nth-child(-n + 3):active::before {
+.menu .link:nth-child(-n + 4):hover::before,
+.menu .link:nth-child(-n + 4):active::before {
   background: var(--highlight-yellow);
 }
 .link img {

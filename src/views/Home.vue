@@ -66,7 +66,6 @@ export default Vue.extend({
   },
   methods: {
     ...mapActions({
-      postData: ActionType.WRITE_DATA,
       fetchData: ActionType.FETCH_BOOKS,
       fetchPhase: ActionType.FETCH_PHASE,
     }),

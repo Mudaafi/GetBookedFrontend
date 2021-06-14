@@ -31,6 +31,11 @@ const routes: Array<RouteConfig> = [
     component: () => import('../views/Faq.vue'),
   },
   {
+    path: '/rules',
+    name: 'Rules',
+    component: () => import('../views/Rules.vue'),
+  },
+  {
     path: '/*',
     name: '404Page',
     component: () => import('../views/404.vue'),
