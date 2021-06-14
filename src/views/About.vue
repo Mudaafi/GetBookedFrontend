@@ -208,6 +208,7 @@ export default Vue.extend({
   text-align: center;
   justify-content: center;
   margin: 7px 15px 12px 5px;
+  z-index: 1;
 }
 
 .bubbles {
