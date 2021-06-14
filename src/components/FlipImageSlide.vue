@@ -132,12 +132,10 @@ export default Vue.extend({
 }
 
 .slide .img.front {
-  -webkit-transform: translate3d(0, 0, 0);
   transform: translateZ(1px);
 }
 
 .slide .img.back {
-  -webkit-transform: translate3d(0, 0, 0);
   transform: scaleX(-1);
 }
 

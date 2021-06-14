@@ -173,6 +173,8 @@ export default Vue.extend({
   height: 100%;
   width: 100vw;
   top: 0;
+  /* https://stackoverflow.com/questions/40895387/z-index-not-working-on-safari-fine-on-firefox-and-chrome */
+  transform: translate3d(0, 0, 200px);
 }
 .escape {
   display: flex;
