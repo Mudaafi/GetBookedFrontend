@@ -104,6 +104,10 @@ export default Vue.extend({
   transform: translateZ(1px);
 }
 
+.slide .img.back {
+  transform: scaleX(-1);
+}
+
 .slide.img-fullscreen {
   height: 70vh;
   width: 90vw;
