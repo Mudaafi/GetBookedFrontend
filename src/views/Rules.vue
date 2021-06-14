@@ -55,7 +55,7 @@ export default Vue.extend({
   background-color: white;
   min-height: 87.4vh;
   height: 100%;
-  padding: 14px 20px 24px 40px;
+  padding: 14px 20px 24px 20px;
   position: relative;
   overflow: hidden;
 }
