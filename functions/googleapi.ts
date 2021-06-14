@@ -227,13 +227,14 @@ function convertToAboutObjects(rows: Array<Array<any>>) {
   })
 
   aboutUsObjects = aboutUsObjects.filter(
-    (obj: AboutSection) => obj != null && obj != undefined && obj.title != null,
+    (obj: AboutSection) =>
+      obj != null && obj != undefined && !(obj.title == '' && obj.text == ''),
   )
   activeMemberObjects = activeMemberObjects.filter(
-    (obj: MemberSection) => obj != null && obj != undefined && obj.name != null,
+    (obj: MemberSection) => obj != null && obj != undefined && obj.name != '',
   )
   oldMembersObjects = oldMembersObjects.filter(
-    (obj: MemberSection) => obj != null && obj != undefined && obj.name != null,
+    (obj: MemberSection) => obj != null && obj != undefined && obj.name != '',
   )
   return [aboutUsObjects, activeMemberObjects, oldMembersObjects]
 }
