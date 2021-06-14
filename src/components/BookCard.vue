@@ -8,7 +8,10 @@
         : { name: 'BookInfo', params: { listingId: book.listingId } }
     "
   >
-    <picture class="carousel" :class="{ 'is-fullscreen': isFullscreen }">
+    <picture v-if="!isExtracted">
+      <img :src="book.imgFrontUrl" alt="" class="img img-bg" />
+    </picture>
+    <picture class="carousel" :class="{ 'is-fullscreen': isFullscreen }" v-else>
       <FlipImageSlide
         class="img img-bg"
         :frontUrl="book.imgFrontUrl"
