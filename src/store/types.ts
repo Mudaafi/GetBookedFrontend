@@ -9,6 +9,7 @@ export enum ActionType {
   VERIFY_USER = 'VERIFY_USER',
   LOG_USER = 'LOG_USER',
   FETCH_PHASE = 'FETCH_PHASE',
+  REGISTER_USER = 'REGISTER_USER',
 }
 export enum MutationType {
   UPDATE_BOOKS = 'UPDATE_BOOKS',

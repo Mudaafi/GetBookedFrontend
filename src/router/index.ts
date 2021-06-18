@@ -36,6 +36,12 @@ const routes: Array<RouteConfig> = [
     component: () => import('../views/Rules.vue'),
   },
   {
+    path: '/verify/:code',
+    name: 'Verify',
+    component: () => import('../views/Verify.vue'),
+    props: true,
+  },
+  {
     path: '/*',
     name: '404Page',
     component: () => import('../views/404.vue'),

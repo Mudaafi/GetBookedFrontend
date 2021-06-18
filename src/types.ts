@@ -45,3 +45,9 @@ export interface MemberSection {
   title?: string
   img: string
 }
+
+export enum RegistrationResult {
+  REGISTERED = 'REGISTERED',
+  SUCCESS = 'SUCCESS',
+  FAILURE = 'FAILURE',
+}

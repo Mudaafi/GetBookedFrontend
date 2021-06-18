@@ -15,6 +15,7 @@ import {
   MemberSection,
   Faq,
   Rules,
+  RegistrationResult,
 } from '../src/types'
 
 // --- Http Handlers
@@ -57,7 +58,7 @@ async function handlePostRequests(data: PostDataParams) {
   switch (data.function) {
     case 'borrow':
       const borrowParams = data.data as BorrowParams
-      var chatId = await getUserChatId(borrowParams.username)
+      var chatId = await getUserChatIdByUsername(borrowParams.username)
       if (chatId == null) return false
       let btns = genInlineButtons(
         [['Confirm']],
@@ -77,8 +78,12 @@ async function handlePostRequests(data: PostDataParams) {
       }
     case 'verifyUser':
       if (typeof data.data != 'string') return
-      var chatId = await getUserChatId(data.data)
+      var chatId = await getUserChatIdByUsername(data.data)
       return chatId != undefined
+    case 'registerUser':
+      if (typeof data.data != 'string') return
+      var registrationResult = await registerUser(data.data)
+      return registrationResult
     case 'default':
       if (typeof data.data != 'string') return
       return writeData(
@@ -157,7 +162,7 @@ async function handleGetRequests(data: GetDataParams) {
 }
 
 // Complex Logic
-async function getUserChatId(username: string): Promise<number> {
+async function getUserChatIdByUsername(username: string): Promise<number> {
   const USER_SHEET = 'users'
   const rows = await getData('A2:D', process.env.GSHEET_LOG_ID, USER_SHEET)
   const userRow = rows.filter(
@@ -167,6 +172,32 @@ async function getUserChatId(username: string): Promise<number> {
       row[3] == 'verified',
   )[0]
   return userRow != null ? parseInt(userRow[0]) : null
+}
+
+async function registerUser(code: string) {
+  const USER_SHEET = 'users'
+  const rows = await getData('A2:D', process.env.GSHEET_LOG_ID, USER_SHEET)
+  // Assume unique verification code (careful)
+  const userRow = rows.filter((row) => row[2] == code)[0]
+  if (userRow == null) return RegistrationResult.FAILURE
+  if (userRow[3] != 'pending') return RegistrationResult.REGISTERED
+  let rowNo = 2 + rows.indexOf(userRow)
+
+  writeData(`D${rowNo}`, 'verified', process.env.GSHEET_LOG_ID, USER_SHEET)
+  const poc = await getPOC()
+  const textMsg = `You have successfully completed your registration! You can now visit <b>https://getbooked.netlify.app/</b> to browse the available books and make a reservation. You are advised not to change your username while using this service. If you need any assistance, please approach ${poc} .`
+  sendTeleMsg(process.env.TELEBOT_KEY, userRow[0], textMsg)
+
+  return RegistrationResult.SUCCESS
+}
+
+async function getPOC() {
+  const rows = await getData(
+    'J2:J2',
+    process.env.GSHEET_LOG_ID,
+    CONFIG_SHEET_NAME,
+  )
+  return rows[0][0]
 }
 
 // -- Helper functions

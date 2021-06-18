@@ -195,6 +195,21 @@ const actions: ActionTree<State, RootState> = {
     return (await api.post(`/.netlify/functions/googleapi`, params)).data
   },
 
+  [ActionType.REGISTER_USER]: async (
+    // eslint-disable-next-line
+    { commit }: ActionContext<State, RootState>,
+    code: string,
+  ) => {
+    const params: PostDataParams = {
+      function: 'registerUser',
+      data: code,
+    }
+    const registrationResult = (
+      await api.post(`/.netlify/functions/googleapi`, params)
+    ).data
+    return registrationResult
+  },
+
   [ActionType.BORROW_BOOK]: async (
     // eslint-disable-next-line
     { commit }: ActionContext<State, RootState>,
