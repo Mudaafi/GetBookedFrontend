@@ -63,7 +63,9 @@
         </div>
       </div>
       <section class="title-section">
-        <div class="title">{{ book.title }}</div>
+        <div class="title">
+          <span class="blue-highlight">{{ book.title }}</span>
+        </div>
         <div class="author">
           <i>{{ book.author }}</i>
         </div>
@@ -339,24 +341,22 @@ export default Vue.extend({
 }
 
 .mobile-container .title-section .title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  width: fit-content;
+  margin-bottom: 2px;
+}
+
+.mobile-container .title-section .title .blue-highlight {
   /* https://stackoverflow.com/questions/43683187/how-can-i-create-custom-underline-or-highlight-for-text-in-html-or-css */
   background: linear-gradient(
     180deg,
     rgba(255, 255, 255, 0) 38%,
     var(--highlight-blue) 38%
   );
-  font-size: 1.25rem;
-  font-weight: 700;
-  width: fit-content;
   padding-right: 4px;
-  margin-bottom: 2px;
-
-  /* Temp Fix for too long a title */
-  max-width: 87vw;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
 }
+
 .mobile-container .title-section .author {
   font-size: 0.75rem;
   font-weight: 300;
