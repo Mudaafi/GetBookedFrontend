@@ -61,7 +61,6 @@ export default Vue.extend({
   async created() {
     this.res = await this.$store.dispatch(ActionType.REGISTER_USER, this.code)
     this.isLoading = false
-    console.log(this.res)
   },
 })
 </script>
