@@ -74,6 +74,7 @@ export default Vue.extend({
 }
 .main-text {
   font-size: 1.2rem;
+  padding: 0 20px;
 }
 .success-img {
   padding: 30px;
