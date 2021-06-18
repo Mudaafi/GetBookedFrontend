@@ -350,6 +350,12 @@ export default Vue.extend({
   width: fit-content;
   padding-right: 4px;
   margin-bottom: 2px;
+
+  /* Temp Fix for too long a title */
+  max-width: 87vw;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .mobile-container .title-section .author {
   font-size: 0.75rem;
