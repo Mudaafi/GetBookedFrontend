@@ -206,8 +206,8 @@ export default Vue.extend({
 }
 
 .desktop-container .small-card {
-  max-height: 21.625rem;
   margin: 0;
+  height: fit-content;
 }
 
 .desktop-container .big-card {
