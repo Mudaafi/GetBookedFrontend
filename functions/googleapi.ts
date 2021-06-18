@@ -174,11 +174,11 @@ async function getUserChatIdByUsername(username: string): Promise<number> {
   return userRow != null ? parseInt(userRow[0]) : null
 }
 
-async function registerUser(code: string) {
+async function registerUser(chatId: string) {
   const USER_SHEET = 'users'
   const rows = await getData('A2:D', process.env.GSHEET_LOG_ID, USER_SHEET)
   // Assume unique verification code (careful)
-  const userRow = rows.filter((row) => row[2] == code)[0]
+  const userRow = rows.filter((row) => row[0] == chatId)[0]
   if (userRow == null) return RegistrationResult.FAILURE
   if (userRow[3] != 'pending') return RegistrationResult.REGISTERED
   let rowNo = 2 + rows.indexOf(userRow)
