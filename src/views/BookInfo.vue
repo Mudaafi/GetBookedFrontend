@@ -16,12 +16,6 @@
           <h3 class="section-header">Synopsis</h3>
           <div class="synopsis">{{ book.synopsis }}</div>
         </section>
-        <section class="lenders-section">
-          <h3 class="section-header">Lenders:</h3>
-          <ul>
-            <li>{{ book.lenderName }}</li>
-          </ul>
-        </section>
         <section class="footer-section">
           <div class="button-container" v-if="isAvailable">
             <button
@@ -89,12 +83,6 @@
       <section class="synopsis-section">
         <div class="section-title">Synopsis</div>
         <div class="synopsis">{{ book.synopsis }}</div>
-      </section>
-      <section class="lenders-section">
-        <div class="section-title">Lenders:</div>
-        <ul class="lenders">
-          <li>{{ book.lenderName }}</li>
-        </ul>
       </section>
     </div>
     <div class="default" v-else>
@@ -231,9 +219,6 @@ export default Vue.extend({
 }
 .desktop-container .big-card .synopsis-section .section-header {
   margin: 0 0 9px 0;
-}
-.desktop-container .big-card .lenders-section {
-  margin-top: 50px;
 }
 
 .footer-section {
@@ -395,10 +380,6 @@ export default Vue.extend({
 .mobile-container .synopsis-section .synopsis {
   font-size: 0.875rem;
   letter-spacing: 0.085em;
-}
-
-.mobile-container .lenders-section .lenders {
-  margin: 0;
 }
 
 .default {
