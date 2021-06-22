@@ -11,3 +11,24 @@ export function isMobileDevice(): boolean {
     )
   )
 }
+
+// https://stackoverflow.com/questions/3552461/how-to-format-a-javascript-date
+export function formatDate(
+  date: Date,
+  delim = ' ',
+  params: Array<Intl.DateTimeFormatOptions> = [
+    { day: '2-digit' },
+    { month: 'short' },
+    { year: 'numeric' },
+  ],
+): string {
+  function format(param: Intl.DateTimeFormatOptions) {
+    const formatSelector = new Intl.DateTimeFormat('en', param)
+    return formatSelector.format(date)
+  }
+  return params.map(format).join(delim)
+}
+
+const s = formatDate(new Date())
+
+console.log(s)

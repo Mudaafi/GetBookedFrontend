@@ -42,7 +42,7 @@
           Borrow
         </button>
         <div v-else style="text-align: center">
-          <em>The current phase for Get Booked! has ended.</em>
+          <em>{{ notAvailableText }}</em>
         </div>
       </section>
     </main>
@@ -57,7 +57,7 @@
 <script lang="ts">
 import Vue, { PropType } from 'vue'
 import { BookListing, BookListingStatus } from '@/types'
-import { isMobileDevice } from '@/utilities'
+import { formatDate, isMobileDevice } from '@/utilities'
 import AvailabilityTag from '@/components/AvailabilityTag.vue'
 import { GetterType } from '@/store/types'
 import FlipImageSlide from '@/components/FlipImageSlide.vue'
@@ -92,6 +92,14 @@ export default Vue.extend({
     },
     isWithinPhase(): boolean {
       return this.$store.getters[GetterType.IS_WITHIN_PHASE](new Date())
+    },
+    phaseStart(): Date | null {
+      return this.$store.getters[GetterType.PHASE_START]
+    },
+    notAvailableText(): string {
+      if (!this.phaseStart)
+        return 'The current phase for Get Booked! has ended.'
+      return `The next phase will begin on ${formatDate(this.phaseStart)}`
     },
   },
   data() {

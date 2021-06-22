@@ -26,9 +26,7 @@
               Borrow Now!
             </button>
             <div v-else style="text-align: center">
-              <em>The current phase for Get Booked! has ended.</em>
-              <br />
-              <em>See you in the next one!</em>
+              <div v-html="notAvailbleText"></div>
             </div>
           </div>
           <AvailabilityTag class="tag" :value="book.status" v-else />
@@ -73,10 +71,7 @@
             Borrow
           </div>
           <div v-else style="text-align: center">
-            <em
-              >The current phase for Get Booked! has ended. See you in the next
-              one!</em
-            >
+            <div v-html="notAvailbleText"></div>
           </div>
         </div>
       </section>
@@ -114,7 +109,7 @@ import Overlay from '@/components/Overlay.vue'
 import BorrowForm from '@/components/ModalBorrow.vue'
 import { ActionType, GetterType } from '@/store/types'
 import { BookListing, BookListingStatus } from '@/types'
-import { isMobileDevice } from '@/utilities'
+import { formatDate, isMobileDevice } from '@/utilities'
 export default Vue.extend({
   name: 'BookInfo',
   props: {
@@ -156,6 +151,16 @@ export default Vue.extend({
     },
     isWithinPhase(): boolean {
       return this.$store.getters[GetterType.IS_WITHIN_PHASE](new Date())
+    },
+    phaseStart(): Date | null {
+      return this.$store.getters[GetterType.PHASE_START]
+    },
+    notAvailbleText(): string {
+      if (!this.phaseStart)
+        return '<em>The current phase for Get Booked! has ended.</em><br /><em>See you in the next one!</em>'
+      return `<em>The current phase for Get Booked! has ended.</em><br /><em>The next phase will begin on ${formatDate(
+        this.phaseStart,
+      )}</em>`
     },
   },
 
@@ -200,6 +205,18 @@ export default Vue.extend({
   height: fit-content;
 }
 
+@media screen and (max-width: 800px) {
+  .desktop-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .desktop-container .small-card,
+  .desktop-container .big-card {
+    margin-bottom: 24px;
+  }
+}
+
 .desktop-container .big-card {
   background-color: white;
   position: relative;
@@ -209,6 +226,7 @@ export default Vue.extend({
   text-align: start;
 
   width: 65%;
+  min-width: 400px;
   margin-left: 32px;
   padding: 40px;
   padding-bottom: 80px;
