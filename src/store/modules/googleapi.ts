@@ -254,7 +254,7 @@ const mutations: MutationTree<State> = {
       return map
     }, {} as { [id: string]: BookListing })
     state.books = mappedBooks
-    state.booksIdArr = filteredBooks.map((book) => book.listingId)
+    state.booksIdArr = filteredBooks.map((book) => book.listingId).reverse()
   },
   [MutationType.UPDATE_ABOUT]: (
     state: State,
